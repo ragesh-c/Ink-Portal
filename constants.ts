@@ -28,14 +28,24 @@ export const PROJECTS_DATA: Project[] = [
     featured: true
   },
   {
-    id: "proj-03",
-    title: "Google’s Digital Wellbeing",
-    type: "UX",
+    id: "proj-06",
+    title: "Redesigning BookMyShow's Booking flow",
+    type: "Case Study",
+    platform: "Web",
+    externalURL: "https://www.figma.com/proto/rZTV3zvLjYFWlMtC0ozXVk/BookMyShow-Final-Case-Study?node-id=33-1200&t=biDnO1hh00eRX4hM-1",
+    thumbnailImage: "https://res.cloudinary.com/dpxbzg9tn/image/upload/v1765711541/1_1_mfz61y.png",
+    shortDescription: "A UX Case study focusing on improving seat selection, pricing and personalisation experience",
+    featured: true
+  },
+  {
+    id: "proj-05",
+    title: "Designing Last Call on Zomato",
+    type: "Case Study",
     platform: "Medium",
-    externalURL: "https://medium.com/@ragesh-changam/how-googles-digital-wellbeing-forgot-wellbeing-a-kinder-bedtime-that-people-will-keep-6697e26fbd98",
-    thumbnailImage: "https://res.cloudinary.com/dpxbzg9tn/image/upload/v1765642951/Post1_aqjvy6.png",
-    shortDescription: "How Google’s Digital Wellbeing Forgot Wellbeing: a kinder Bedtime that people will keep",
-    featured: false
+    externalURL: "https://medium.com/@ragesh-changam/designing-last-call-on-zomato-tackling-indias-restaurant-food-waste-57e32ae89fd6",
+    thumbnailImage: "https://res.cloudinary.com/dpxbzg9tn/image/upload/v1765641766/8_enri1b.jpg",
+    shortDescription: "A UX case study focused on reducing food wastage through surplus meal sales, improving trust, and balancing business with sustainability.",
+    featured: true
   },
   {
     id: "proj-04",
@@ -48,14 +58,14 @@ export const PROJECTS_DATA: Project[] = [
     featured: false
   },
   {
-    id: "proj-05",
-    title: "Designing Last Call on Zomato",
-    type: "Case Study",
+    id: "proj-03",
+    title: "Google’s Digital Wellbeing",
+    type: "UX",
     platform: "Medium",
-    externalURL: "https://medium.com/@ragesh-changam/designing-last-call-on-zomato-tackling-indias-restaurant-food-waste-57e32ae89fd6",
-    thumbnailImage: "https://res.cloudinary.com/dpxbzg9tn/image/upload/v1765641766/8_enri1b.jpg",
-    shortDescription: "A UX case study focused on reducing food wastage through surplus meal sales, improving trust, and balancing business with sustainability.",
-    featured: true
+    externalURL: "https://medium.com/@ragesh-changam/how-googles-digital-wellbeing-forgot-wellbeing-a-kinder-bedtime-that-people-will-keep-6697e26fbd98",
+    thumbnailImage: "https://res.cloudinary.com/dpxbzg9tn/image/upload/v1765642951/Post1_aqjvy6.png",
+    shortDescription: "How Google’s Digital Wellbeing Forgot Wellbeing: a kinder Bedtime that people will keep",
+    featured: false
   }
 ];
 
