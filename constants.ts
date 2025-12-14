@@ -79,12 +79,12 @@ Every project I take on is an opportunity to connect ideas, spark curiosity, and
     { subject: 'Environment Building', A: 80, fullMark: 100 },
   ],
   toolStack: [
-    { name: "Figma", logo: "https://cdn.simpleicons.org/figma" },
+    { name: "Figma", logo: "https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" },
     { name: "Unreal Engine", logo: "https://cdn.simpleicons.org/unrealengine" },
     { name: "Framer", logo: "https://cdn.simpleicons.org/framer" },
-    { name: "Notion", logo: "https://cdn.simpleicons.org/notion" },
-    { name: "Google AI Studio", logo: "https://cdn.simpleicons.org/googlegemini" }, // Using Gemini logo for AI Studio
+    { name: "Notion", logo: "https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png" },
+    { name: "Google AI Studio", logo: "https://upload.wikimedia.org/wikipedia/commons/8/8a/Google_Gemini_logo.svg" },
     { name: "Photoshop", logo: "https://upload.wikimedia.org/wikipedia/commons/a/af/Adobe_Photoshop_CC_icon.svg" },
-    { name: "Davinci Resolve", logo: "https://cdn.simpleicons.org/davinciresolve" },
+    { name: "Davinci Resolve", logo: "https://upload.wikimedia.org/wikipedia/commons/4/4d/DaVinci_Resolve_Studio.png" },
   ]
 };
