@@ -8,6 +8,7 @@ import ProjectModal from './components/ProjectModal';
 import ScrollReveal from './components/ScrollReveal';
 import MagneticTilt from './components/MagneticTilt';
 import Marquee from './components/Marquee';
+import SkillsChart from './components/SkillsChart';
 import { ArrowRight, Star, Cpu, PenTool, Layout, Linkedin, Mail, Phone, ArrowDown } from 'lucide-react';
 
 type AnimationState = 'idle' | 'out' | 'in-snap' | 'in';
@@ -295,6 +296,18 @@ const App: React.FC = () => {
                     <div className="mt-6 text-center">
                         <p className="font-comic text-gray-400 text-sm tracking-widest">ARSENAL LOADED</p>
                     </div>
+                  </ComicPanel>
+                </MagneticTilt>
+              </ScrollReveal>
+              
+              {/* Skills Chart - Added to fix unused component and enhance section */}
+              <ScrollReveal delay={350}>
+                <MagneticTilt intensity={2}>
+                  <ComicPanel variant="white" className="p-4" noShadow>
+                    <div className="bg-secondary p-1 border-b-4 border-ink mb-2 -mx-4 -mt-4 text-center">
+                       <h3 className="font-comic text-xl uppercase">Skill Stats</h3>
+                    </div>
+                    <SkillsChart data={ABOUT_DATA.skills} />
                   </ComicPanel>
                 </MagneticTilt>
               </ScrollReveal>
