@@ -300,7 +300,7 @@ const App: React.FC = () => {
                 </MagneticTilt>
               </ScrollReveal>
               
-              {/* Skills Chart - Added to fix unused component and enhance section */}
+              {/* Skills Chart */}
               <ScrollReveal delay={350}>
                 <MagneticTilt intensity={2}>
                   <ComicPanel variant="white" className="p-4" noShadow>
@@ -337,10 +337,10 @@ const App: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-comic-light p-2 md:p-6 font-sans selection:bg-accent selection:text-white flex flex-col overflow-x-hidden">
+    <div className="min-h-screen w-full bg-paper paper-texture border-x-4 border-y-4 md:border-x-8 md:border-y-8 border-ink font-sans selection:bg-accent selection:text-white flex flex-col relative overflow-x-hidden">
       
       {/* Scroll Parallax Background Elements */}
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
+      <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
         {/* Floating Circle */}
         <div 
           className="absolute top-[10%] left-[5%] text-gray-200 opacity-50"
@@ -371,11 +371,8 @@ const App: React.FC = () => {
         </div>
       </div>
 
-      {/* Main Container - The "Page" */}
-      <div className="flex-grow max-w-7xl mx-auto w-full paper-texture border-4 border-ink shadow-comic relative flex flex-col bg-paper z-10">
-        
-        {/* Header Strip */}
-        <header className="border-b-4 border-ink p-6 md:p-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-4 bg-transparent relative overflow-hidden">
+      {/* Header Strip */}
+      <header className="border-b-4 border-ink p-6 md:p-8 flex flex-col md:flex-row justify-between items-start md:items-end gap-4 bg-transparent relative z-20 flex-shrink-0">
           <div className="absolute top-[-20px] right-[-20px] p-2 opacity-5 pointer-events-none transform rotate-12">
              <h1 className="text-[12rem] font-comic text-ink">ART</h1>
           </div>
@@ -403,10 +400,10 @@ const App: React.FC = () => {
                <Linkedin size={24} />
             </a>
           </div>
-        </header>
+      </header>
 
-        {/* Content Area */}
-        <main className="p-4 md:p-8 relative flex-grow overflow-hidden perspective-1000">
+      {/* Main Content Area */}
+      <main className="p-4 md:p-8 relative flex-grow overflow-hidden perspective-1000 z-10">
            {/* Navigation */}
            <Navigation 
              activeTab={activeTab} 
@@ -418,16 +415,14 @@ const App: React.FC = () => {
            <div className={`h-full transform-style-3d ${getPageClass()}`}>
              {renderContent()}
            </div>
-        </main>
+      </main>
 
-        {/* Footer */}
-        <footer className="border-t-4 border-ink p-6 bg-zinc-100/50 text-center mt-auto">
+      {/* Footer */}
+      <footer className="border-t-4 border-ink p-6 bg-zinc-100/50 text-center mt-auto z-20 flex-shrink-0">
           <p className="font-comic text-gray-500 uppercase">
              © {new Date().getFullYear()} {APP_CONFIG.appName}. All rights reserved. No capes.
           </p>
-        </footer>
-
-      </div>
+      </footer>
 
       {/* Modal Layer */}
       <ProjectModal 
