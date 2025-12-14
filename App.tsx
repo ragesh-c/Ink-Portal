@@ -9,7 +9,7 @@ import ScrollReveal from './components/ScrollReveal';
 import MagneticTilt from './components/MagneticTilt';
 import Marquee from './components/Marquee';
 import SkillsChart from './components/SkillsChart';
-import { ArrowRight, Star, Cpu, PenTool, Layout, Linkedin, Mail, Phone, ArrowDown } from 'lucide-react';
+import { ArrowRight, Star, Cpu, PenTool, Layout, Linkedin, Mail, Phone, ArrowDown, Box } from 'lucide-react';
 
 type AnimationState = 'idle' | 'out' | 'in-snap' | 'in';
 
@@ -317,13 +317,13 @@ const App: React.FC = () => {
                   <MagneticTilt>
                     <div className="bg-ink text-white p-4 border-4 border-black text-center shadow-comic hover-comic-pop h-full flex flex-col items-center justify-center">
                       <PenTool className="mx-auto mb-2" />
-                      <div className="font-comic text-xl">Design</div>
+                      <div className="font-comic text-xl">UX</div>
                     </div>
                   </MagneticTilt>
                   <MagneticTilt>
                     <div className="bg-accent text-white p-4 border-4 border-ink text-center shadow-comic hover-comic-pop h-full flex flex-col items-center justify-center">
-                      <Layout className="mx-auto mb-2" />
-                      <div className="font-comic text-xl">Code</div>
+                      <Box className="mx-auto mb-2" />
+                      <div className="font-comic text-xl">3D Animation</div>
                     </div>
                   </MagneticTilt>
                 </div>
