@@ -76,7 +76,7 @@ Every project I take on is an opportunity to connect ideas, spark curiosity, and
     { subject: 'Animation', A: 95, fullMark: 100 },
     { subject: 'Prototyping', A: 80, fullMark: 100 },
     { subject: 'Strategy', A: 70, fullMark: 100 },
-    { subject: 'Coding', A: 60, fullMark: 100 },
+    { subject: 'Environment Building', A: 80, fullMark: 100 },
   ],
   toolStack: [
     { name: "Figma", logo: "https://cdn.simpleicons.org/figma" },
