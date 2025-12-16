@@ -48,6 +48,16 @@ export const PROJECTS_DATA: Project[] = [
     featured: true
   },
   {
+    id: "proj-07",
+    title: "Weathering – Short Animation (Creative Roots)",
+    type: "Animation",
+    platform: "YouTube",
+    externalURL: "https://www.youtube.com/embed/RmTcEqda9is",
+    thumbnailImage: "https://img.youtube.com/vi/RmTcEqda9is/hqdefault.jpg",
+    shortDescription: "Weathering explores the transformative power of perspective, showing how it evolves and heals through personal experience.",
+    featured: true
+  },
+  {
     id: "proj-04",
     title: "A Vikings Tale",
     type: "Animation",
