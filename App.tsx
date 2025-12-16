@@ -302,7 +302,7 @@ const App: React.FC = () => {
               
               {/* Skills Chart */}
               <ScrollReveal delay={350}>
-                <MagneticTilt intensity={2}>
+                <MagneticTilt intensity={15}>
                   <ComicPanel variant="white" className="p-4" noShadow>
                     <div className="bg-secondary p-1 border-b-4 border-ink mb-2 -mx-4 -mt-4 text-center">
                        <h3 className="font-comic text-xl uppercase">Skill Stats</h3>

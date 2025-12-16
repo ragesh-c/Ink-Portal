@@ -45,10 +45,13 @@ const ProjectModal: React.FC<ProjectModalProps> = ({ project, onClose, clickPosi
   const getTransformOrigin = () => {
     if (!clickPosition) return 'center';
     
-    const xPercent = (clickPosition.x / window.innerWidth) * 100;
-    const yPercent = (clickPosition.y / window.innerHeight) * 100;
+    // We calculate the vector from the center of the viewport to the click position.
+    // Since the modal is centered in the viewport (flex-centered), 
+    // adding this vector to the modal's center (50% 50%) gives the exact click point.
+    const xOffset = clickPosition.x - (window.innerWidth / 2);
+    const yOffset = clickPosition.y - (window.innerHeight / 2);
     
-    return `${xPercent}% ${yPercent}%`;
+    return `calc(50% + ${xOffset}px) calc(50% + ${yOffset}px)`;
   };
 
   if (!renderProject) return null;
