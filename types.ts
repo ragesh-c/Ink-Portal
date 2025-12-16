@@ -17,6 +17,14 @@ export interface AboutContent {
   toolStack: Array<{ name: string; logo: string }>;
 }
 
+export interface CareerItem {
+  id: string;
+  role: string;
+  organization: string;
+  period: string;
+  type: 'Work' | 'Education';
+}
+
 export type TabType = 'Home' | 'Projects' | 'About Me';
 
 export interface VisualConfig {

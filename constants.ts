@@ -1,4 +1,4 @@
-import { Project, AboutContent } from './types';
+import { Project, AboutContent, CareerItem } from './types';
 
 export const APP_CONFIG = {
   appName: "Ragesh Changam",
@@ -76,6 +76,51 @@ export const PROJECTS_DATA: Project[] = [
     thumbnailImage: "https://res.cloudinary.com/dpxbzg9tn/image/upload/v1765642951/Post1_aqjvy6.png",
     shortDescription: "How Google’s Digital Wellbeing Forgot Wellbeing: a kinder Bedtime that people will keep",
     featured: false
+  }
+];
+
+export const CAREER_TIMELINE_DATA: CareerItem[] = [
+  {
+    id: 'c-01',
+    role: 'UX Designer',
+    organization: 'FPL Core',
+    period: 'Sep: 2025 - Present',
+    type: 'Work'
+  },
+  {
+    id: 'c-02',
+    role: 'Technical Designer',
+    organization: 'Sustain Film Festival',
+    period: 'Sep: 2024 - May: 2025',
+    type: 'Work'
+  },
+  {
+    id: 'c-03',
+    role: 'Masters of Film, Animation, and Digital Arts',
+    organization: 'University Of Surrey',
+    period: 'Sep:2023 - Sep:2024',
+    type: 'Education'
+  },
+  {
+    id: 'c-04',
+    role: 'Freelance Designer',
+    organization: 'Various Clients',
+    period: 'Jan: 2023 - Present',
+    type: 'Work'
+  },
+  {
+    id: 'c-05',
+    role: 'Visual Designer',
+    organization: 'McKinsey & Company',
+    period: 'Jun: 2019 - Oct: 2022',
+    type: 'Work'
+  },
+  {
+    id: 'c-06',
+    role: 'Bachelor of Commerce with Information Technology',
+    organization: 'Bharathiar University',
+    period: 'Jun: 2016 - May: 2019',
+    type: 'Education'
   }
 ];
 

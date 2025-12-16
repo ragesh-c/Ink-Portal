@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { APP_CONFIG, PROJECTS_DATA, ABOUT_DATA } from './constants';
+import { APP_CONFIG, PROJECTS_DATA, ABOUT_DATA, CAREER_TIMELINE_DATA } from './constants';
 import { TabType, Project } from './types';
 import Navigation from './components/Navigation';
 import ComicPanel from './components/ComicPanel';
@@ -9,6 +9,7 @@ import ScrollReveal from './components/ScrollReveal';
 import MagneticTilt from './components/MagneticTilt';
 import Marquee from './components/Marquee';
 import SkillsChart from './components/SkillsChart';
+import CareerTimeline from './components/CareerTimeline';
 import { ArrowRight, Star, Cpu, PenTool, Layout, Linkedin, Mail, Phone, ArrowDown, Box } from 'lucide-react';
 
 type AnimationState = 'idle' | 'out' | 'in-snap' | 'in';
@@ -268,6 +269,12 @@ const App: React.FC = () => {
                     "{ABOUT_DATA.philosophy}"
                   </p>
                 </ComicPanel>
+              </ScrollReveal>
+
+              <ScrollReveal delay={250}>
+                <MagneticTilt intensity={1}>
+                  <CareerTimeline data={CAREER_TIMELINE_DATA} />
+                </MagneticTilt>
               </ScrollReveal>
             </div>
 
