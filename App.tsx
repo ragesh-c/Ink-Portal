@@ -238,103 +238,106 @@ const App: React.FC = () => {
 
       case 'About Me':
         return (
-          <div className="grid md:grid-cols-12 gap-8 relative isolate">
-            {/* Bio Column */}
-            <div className="md:col-span-7 space-y-8">
-              <ScrollReveal>
-                <MagneticTilt intensity={2}>
-                  <ComicPanel className="p-8">
-                    <div className="flex items-center gap-3 mb-6">
-                      <div className="bg-accent p-2 border-2 border-ink shadow-comic-sm">
-                        <Star className="text-white" size={24} />
-                      </div>
-                      <h2 className="font-comic text-4xl uppercase text-stroke-white drop-shadow-md">Origin Story</h2>
-                    </div>
-                    <p className="font-sans text-lg leading-relaxed whitespace-pre-line">
-                      {ABOUT_DATA.bio}
-                    </p>
-                  </ComicPanel>
-                </MagneticTilt>
-              </ScrollReveal>
-
-              <ScrollReveal delay={200}>
-                <ComicPanel variant="yellow" className="p-8 transform rotate-1 transition-transform hover:rotate-2">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="bg-ink p-2">
-                      <Cpu className="text-white" size={20} />
-                    </div>
-                    <h3 className="font-comic text-2xl uppercase">Philosophy</h3>
-                  </div>
-                  <p className="font-sans font-medium italic text-lg border-l-4 border-ink pl-4">
-                    "{ABOUT_DATA.philosophy}"
-                  </p>
-                </ComicPanel>
-              </ScrollReveal>
-
-              <ScrollReveal delay={250}>
+          <div className="space-y-8 relative isolate">
+             {/* Full Width Career Timeline */}
+             <ScrollReveal>
                 <MagneticTilt intensity={1}>
                   <CareerTimeline data={CAREER_TIMELINE_DATA} />
                 </MagneticTilt>
-              </ScrollReveal>
-            </div>
+             </ScrollReveal>
 
-            {/* Stats / Tech Stack Column */}
-            <div className="md:col-span-5 space-y-8">
-              <ScrollReveal delay={300}>
-                <MagneticTilt intensity={5}>
-                  <ComicPanel variant="white" className="p-6">
-                    <h3 className="font-comic text-2xl mb-4 text-center bg-ink text-white py-2 uppercase border-2 border-transparent">Tech Stack</h3>
-                    
-                    <div className="grid grid-cols-2 gap-3 mt-4">
-                        {ABOUT_DATA.toolStack.map((tool) => (
-                          <div key={tool.name} className="flex flex-col items-center justify-center p-4 border-2 border-ink bg-gray-50 hover:bg-white hover-comic-pop transition-all text-center group cursor-default">
-                            <div className="w-10 h-10 mb-2 flex items-center justify-center transform group-hover:scale-125 transition-transform">
-                              <img 
-                                src={tool.logo} 
-                                alt={`${tool.name} Logo`} 
-                                className="w-full h-full object-contain"
-                              />
+             <div className="grid md:grid-cols-12 gap-8 relative">
+              {/* Bio Column */}
+              <div className="md:col-span-7 space-y-8">
+                <ScrollReveal delay={100}>
+                  <MagneticTilt intensity={2}>
+                    <ComicPanel className="p-8">
+                      <div className="flex items-center gap-3 mb-6">
+                        <div className="bg-accent p-2 border-2 border-ink shadow-comic-sm">
+                          <Star className="text-white" size={24} />
+                        </div>
+                        <h2 className="font-comic text-4xl uppercase text-stroke-white drop-shadow-md">Origin Story</h2>
+                      </div>
+                      <p className="font-sans text-lg leading-relaxed whitespace-pre-line">
+                        {ABOUT_DATA.bio}
+                      </p>
+                    </ComicPanel>
+                  </MagneticTilt>
+                </ScrollReveal>
+
+                <ScrollReveal delay={200}>
+                  <ComicPanel variant="yellow" className="p-8 transform rotate-1 transition-transform hover:rotate-2">
+                    <div className="flex items-center gap-3 mb-4">
+                      <div className="bg-ink p-2">
+                        <Cpu className="text-white" size={20} />
+                      </div>
+                      <h3 className="font-comic text-2xl uppercase">Philosophy</h3>
+                    </div>
+                    <p className="font-sans font-medium italic text-lg border-l-4 border-ink pl-4">
+                      "{ABOUT_DATA.philosophy}"
+                    </p>
+                  </ComicPanel>
+                </ScrollReveal>
+              </div>
+
+              {/* Stats / Tech Stack Column */}
+              <div className="md:col-span-5 space-y-8">
+                <ScrollReveal delay={300}>
+                  <MagneticTilt intensity={5}>
+                    <ComicPanel variant="white" className="p-6">
+                      <h3 className="font-comic text-2xl mb-4 text-center bg-ink text-white py-2 uppercase border-2 border-transparent">Tech Stack</h3>
+                      
+                      <div className="grid grid-cols-2 gap-3 mt-4">
+                          {ABOUT_DATA.toolStack.map((tool) => (
+                            <div key={tool.name} className="flex flex-col items-center justify-center p-4 border-2 border-ink bg-gray-50 hover:bg-white hover-comic-pop transition-all text-center group cursor-default">
+                              <div className="w-10 h-10 mb-2 flex items-center justify-center transform group-hover:scale-125 transition-transform">
+                                <img 
+                                  src={tool.logo} 
+                                  alt={`${tool.name} Logo`} 
+                                  className="w-full h-full object-contain"
+                                />
+                              </div>
+                              <span className="font-bold font-sans text-sm group-hover:text-accent transition-colors">{tool.name}</span>
                             </div>
-                            <span className="font-bold font-sans text-sm group-hover:text-accent transition-colors">{tool.name}</span>
-                          </div>
-                        ))}
-                    </div>
-                    
-                    <div className="mt-6 text-center">
-                        <p className="font-comic text-gray-400 text-sm tracking-widest">ARSENAL LOADED</p>
-                    </div>
-                  </ComicPanel>
-                </MagneticTilt>
-              </ScrollReveal>
-              
-              {/* Skills Chart */}
-              <ScrollReveal delay={350}>
-                <MagneticTilt intensity={15}>
-                  <ComicPanel variant="white" className="p-4" noShadow>
-                    <div className="bg-secondary p-1 border-b-4 border-ink mb-2 -mx-4 -mt-4 text-center">
-                       <h3 className="font-comic text-xl uppercase">Skill Stats</h3>
-                    </div>
-                    <SkillsChart data={ABOUT_DATA.skills} />
-                  </ComicPanel>
-                </MagneticTilt>
-              </ScrollReveal>
+                          ))}
+                      </div>
+                      
+                      <div className="mt-6 text-center">
+                          <p className="font-comic text-gray-400 text-sm tracking-widest">ARSENAL LOADED</p>
+                      </div>
+                    </ComicPanel>
+                  </MagneticTilt>
+                </ScrollReveal>
+                
+                {/* Skills Chart */}
+                <ScrollReveal delay={350}>
+                  <MagneticTilt intensity={15}>
+                    <ComicPanel variant="white" className="p-4" noShadow>
+                      <div className="bg-secondary p-1 border-b-4 border-ink mb-2 -mx-4 -mt-4 text-center">
+                         <h3 className="font-comic text-xl uppercase">Skill Stats</h3>
+                      </div>
+                      <SkillsChart data={ABOUT_DATA.skills} />
+                    </ComicPanel>
+                  </MagneticTilt>
+                </ScrollReveal>
 
-              <ScrollReveal delay={400}>
-                <div className="grid grid-cols-2 gap-4">
-                  <MagneticTilt>
-                    <div className="bg-ink text-white p-4 border-4 border-black text-center shadow-comic hover-comic-pop h-full flex flex-col items-center justify-center">
-                      <PenTool className="mx-auto mb-2" />
-                      <div className="font-comic text-xl">UX</div>
-                    </div>
-                  </MagneticTilt>
-                  <MagneticTilt>
-                    <div className="bg-accent text-white p-4 border-4 border-ink text-center shadow-comic hover-comic-pop h-full flex flex-col items-center justify-center">
-                      <Box className="mx-auto mb-2" />
-                      <div className="font-comic text-xl">3D Animation</div>
-                    </div>
-                  </MagneticTilt>
-                </div>
-              </ScrollReveal>
+                <ScrollReveal delay={400}>
+                  <div className="grid grid-cols-2 gap-4">
+                    <MagneticTilt>
+                      <div className="bg-ink text-white p-4 border-4 border-black text-center shadow-comic hover-comic-pop h-full flex flex-col items-center justify-center">
+                        <PenTool className="mx-auto mb-2" />
+                        <div className="font-comic text-xl">UX</div>
+                      </div>
+                    </MagneticTilt>
+                    <MagneticTilt>
+                      <div className="bg-accent text-white p-4 border-4 border-ink text-center shadow-comic hover-comic-pop h-full flex flex-col items-center justify-center">
+                        <Box className="mx-auto mb-2" />
+                        <div className="font-comic text-xl">3D Animation</div>
+                      </div>
+                    </MagneticTilt>
+                  </div>
+                </ScrollReveal>
+              </div>
             </div>
           </div>
         );
