@@ -7,12 +7,21 @@ export const APP_CONFIG = {
 
 export const PROJECTS_DATA: Project[] = [
   {
+    id: "proj-08",
+    title: "What It Takes to Manage 80 Buggies Across 500 Acres Without GPS",
+    type: "Case Study",
+    platform: "Medium",
+    externalURL: "https://medium.com/@ragesh-changam/what-it-takes-to-manage-80-buggies-across-500-acres-without-gps-0e13d8518365?postPublishedType=initial",
+    thumbnailImage: "https://res.cloudinary.com/dpxbzg9tn/image/upload/v1766399598/Free_Arm_Holding_MacBook_Pro_Mockup_thwmfy.jpg",
+    shortDescription: "How I used vibe coding, system thinking, and AI-assisted exploration to design an operational dashboard for high-complexity, real-world constraints.",
+    featured: true
+  },
+  {
     id: "proj-01",
     title: "FinFlexi AI",
     type: "UX",
     platform: "Medium",
     externalURL: "https://medium.com/@ragesh-changam/finflexi-ai-a-premium-ui-system-for-gen-z-money-management-d5848f69d109",
-    // Updated to the specific iPhone 16 Pro mockup provided
     thumbnailImage: "https://res.cloudinary.com/dpxbzg9tn/image/upload/v1765617047/01_Free_iPhone_16_Pro_Mockup_Holding_By_Hand_1_qccdsk.png",
     shortDescription: "A Premium UI System for Gen Z Money Management.",
     featured: true
