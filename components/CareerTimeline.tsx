@@ -67,6 +67,8 @@ const CareerTimeline: React.FC<CareerTimelineProps> = ({ data }) => {
 
           {data.map((item, index) => {
             const isWork = item.type === 'Work';
+            const isLatest = index === 0;
+
             return (
               <div key={item.id} className="group relative flex flex-col items-center gap-6 w-[320px] z-10">
                 
@@ -75,7 +77,7 @@ const CareerTimeline: React.FC<CareerTimelineProps> = ({ data }) => {
                   relative
                   flex-shrink-0 w-14 h-14 rounded-full border-4 border-ink z-10 
                   flex items-center justify-center shadow-comic-sm transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6
-                  ${isWork ? 'bg-accent' : 'bg-secondary'}
+                  ${isLatest ? 'bg-purple-600' : (isWork ? 'bg-accent' : 'bg-secondary')}
                 `}>
                   {isWork ? (
                     <Briefcase size={22} className="text-white" />
@@ -84,8 +86,8 @@ const CareerTimeline: React.FC<CareerTimelineProps> = ({ data }) => {
                   )}
                   
                   {/* Pulse effect for current role */}
-                  {index === 0 && (
-                     <div className="absolute inset-0 rounded-full border-4 border-accent animate-ping opacity-75"></div>
+                  {isLatest && (
+                     <div className="absolute inset-0 rounded-full border-4 border-purple-500 animate-ping opacity-75"></div>
                   )}
                 </div>
 
@@ -94,15 +96,19 @@ const CareerTimeline: React.FC<CareerTimelineProps> = ({ data }) => {
                   <div className={`
                     relative bg-white border-2 border-ink p-5 shadow-comic-sm 
                     transition-all duration-200 group-hover:-translate-y-2 group-hover:shadow-comic
-                    ${index === 0 ? 'bg-yellow-50' : ''}
+                    ${isLatest ? 'bg-purple-50' : ''}
                     h-full flex flex-col
                   `}>
                     {/* Connector Triangle Pointing UP */}
                     <div className="absolute -top-[9px] left-1/2 -translate-x-1/2 w-0 h-0 border-l-[8px] border-l-transparent border-r-[8px] border-r-transparent border-b-[8px] border-b-ink"></div>
-                    <div className="absolute -top-[6px] left-1/2 -translate-x-1/2 w-0 h-0 border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[6px] border-b-white"></div>
+                    <div className={`
+                      absolute -top-[6px] left-1/2 -translate-x-1/2 w-0 h-0 
+                      border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[6px] 
+                      ${isLatest ? 'border-b-purple-50' : 'border-b-white'}
+                    `}></div>
 
-                    {index === 0 && (
-                      <div className="absolute -top-3 right-4 bg-ink text-white text-[10px] font-bold px-2 py-0.5 transform rotate-2 rounded-sm shadow-sm animate-bounce">
+                    {isLatest && (
+                      <div className="absolute -top-3 right-4 bg-purple-600 text-white text-[10px] font-bold px-2 py-0.5 transform rotate-2 rounded-sm shadow-sm animate-bounce">
                         CURRENT LEVEL
                       </div>
                     )}

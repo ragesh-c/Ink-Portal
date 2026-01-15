@@ -90,10 +90,17 @@ export const PROJECTS_DATA: Project[] = [
 
 export const CAREER_TIMELINE_DATA: CareerItem[] = [
   {
+    id: 'c-00',
+    role: 'Product Intern',
+    organization: 'Atomicwork',
+    period: 'Jan: 2026 - Present',
+    type: 'Work'
+  },
+  {
     id: 'c-01',
     role: 'UX Designer',
     organization: 'FPL Core',
-    period: 'Sep: 2025 - Present',
+    period: 'Sep: 2025 - Dec: 2025',
     type: 'Work'
   },
   {
