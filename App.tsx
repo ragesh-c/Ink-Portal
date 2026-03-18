@@ -10,7 +10,7 @@ import MagneticTilt from './components/MagneticTilt';
 import Marquee from './components/Marquee';
 import SkillsChart from './components/SkillsChart';
 import CareerTimeline from './components/CareerTimeline';
-import { ArrowRight, Star, Cpu, PenTool, Layout, Linkedin, Mail, Phone, ArrowDown, Box } from 'lucide-react';
+import { Star, Cpu, PenTool, Linkedin, Mail, Phone, ArrowDown, Box } from 'lucide-react';
 
 type AnimationState = 'idle' | 'out' | 'in-snap' | 'in';
 
