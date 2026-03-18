@@ -7,25 +7,29 @@ interface ScrollRevealProps {
   width?: 'full' | 'auto';
 }
 
-const ScrollReveal: React.FC<ScrollRevealProps> = ({ 
-  children, 
-  className = "", 
+const ScrollReveal: React.FC<ScrollRevealProps> = ({
+  children,
+  className = "",
   delay = 0,
   width = 'full'
 }) => {
   const [isVisible, setIsVisible] = useState(false);
-  const [rotation, setRotation] = useState({ start: -2, mid: 1 });
   const ref = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
+  // Compute rotation once at construction time using a ref — avoids an extra
+  // setState/re-render cycle that was previously triggered in useEffect.
+  const rotationRef = useRef<{ start: number; mid: number } | null>(null);
+  if (rotationRef.current === null) {
     // Generate random rotation values for a natural "tossed" look
     // Start rotation: between -3 and 3 degrees
-    const startRot = (Math.random() * 6) - 3; 
+    const startRot = (Math.random() * 6) - 3;
     // Mid bounce rotation: opposite small rotation
     const midRot = -(startRot * 0.3);
-    
-    setRotation({ start: startRot, mid: midRot });
+    rotationRef.current = { start: startRot, mid: midRot };
+  }
+  const rotation = rotationRef.current;
 
+  useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -33,7 +37,7 @@ const ScrollReveal: React.FC<ScrollRevealProps> = ({
           observer.disconnect(); // Only animate once
         }
       },
-      { 
+      {
         threshold: 0.1,
         rootMargin: "0px 0px -50px 0px" // Trigger slightly before fully in view
       }

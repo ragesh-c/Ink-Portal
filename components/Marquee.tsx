@@ -6,7 +6,7 @@ interface MarqueeProps {
   repeat?: number;
 }
 
-const Marquee: React.FC<MarqueeProps> = ({ text, className = '', repeat = 10 }) => {
+const Marquee: React.FC<MarqueeProps> = ({ text, className = '', repeat = 4 }) => {
   return (
     <div className={`overflow-hidden whitespace-nowrap border-y-4 border-ink py-3 select-none ${className}`}>
       <div className="inline-block animate-marquee will-change-transform">

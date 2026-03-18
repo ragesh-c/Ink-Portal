@@ -151,14 +151,6 @@ Outside of work, I’m drawn to challenges that demand both focus and creativity
 
 Every project I take on is an opportunity to connect ideas, spark curiosity, and build something that leaves a mark whether it’s a seat-selection flow that earns user trust or a virtual space that feels alive. If you’re looking to collaborate on something meaningful (or just swap climbing stories), I’d love to hear from you.`,
   philosophy: "Content is king, but context is the kingdom. My work focuses on narrative-driven interfaces where every interaction tells a part of the story.",
-  skills: [
-    { subject: 'UX Research', A: 90, fullMark: 100 },
-    { subject: 'UI Design', A: 85, fullMark: 100 },
-    { subject: 'Animation', A: 95, fullMark: 100 },
-    { subject: 'Prototyping', A: 80, fullMark: 100 },
-    { subject: 'Strategy', A: 70, fullMark: 100 },
-    { subject: 'Environment Building', A: 80, fullMark: 100 },
-  ],
   toolStack: [
     { name: "Figma", logo: "https://upload.wikimedia.org/wikipedia/commons/3/33/Figma-logo.svg" },
     { name: "Unreal Engine", logo: "https://cdn.simpleicons.org/unrealengine" },
