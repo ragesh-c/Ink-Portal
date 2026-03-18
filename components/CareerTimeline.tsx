@@ -7,7 +7,7 @@ interface CareerTimelineProps {
 
 // Short first-person mission log per entry
 const LOGS: Record<string, string> = {
-  'c-00': "Found myself at Atomicwork in December. Product work — sitting with engineers, figuring out what people actually need. Still finding my footing, but there's something honest about it.",
+  'c-00': "Found myself at Atomicwork in December. Product work — sitting with engineers, figuring out what people actually need. Still finding my footing, but there's something honest about it. Learnt a great deal and left with a changed perspective.",
   'c-01': "A short spell at FPL Core. Moved fast, thought clear. Made some things I'm proud of.",
   'c-02': "Near a year with Sustain Film Festival. Design, technical work — invented the rules as I went. Built things from nothing. That's the work I like best.",
   'c-03': "Crossed the water to study in England. Film, Animation, Digital Arts. A year of pulling ideas apart and putting them back together different.",
