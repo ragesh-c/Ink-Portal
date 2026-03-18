@@ -99,59 +99,25 @@
       }
 
       .transform-style-3d {
-        transform-style: preserve-3d;
         transform-origin: left center;
         position: relative;
         will-change: transform;
       }
 
-      /* Soft shadow that builds as the page lifts */
-      .transform-style-3d::after {
-        content: "";
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(
-          to right,
-          transparent 50%,
-          rgba(0,0,0,0.06) 75%,
-          rgba(0,0,0,0.2) 100%
-        );
-        opacity: 0;
-        pointer-events: none;
-        z-index: 50;
+      /* Single keyframe — runs fully on the compositor, zero JS interruptions.
+         0→45%  : page folds away (out)
+         45→55% : edge-on / invisible — content swaps here at 315ms
+         55→100%: new page unfolds in */
+      @keyframes comicPageFlip {
+        0%   { transform: rotateY(0deg); }
+        45%  { transform: rotateY(-90deg); }
+        55%  { transform: rotateY(90deg); }
+        100% { transform: rotateY(0deg); }
       }
 
-      /* Idle */
-      .page-idle {
-        transform: rotateY(0deg);
-      }
-      .page-idle::after { opacity: 0; transition: opacity 0.3s; }
-
-      /* Out — page lifts and folds away, steady pace */
-      .page-flip-out {
-        transform: rotateY(-90deg);
-        transition: transform 0.35s cubic-bezier(0.4, 0, 0.8, 1);
-      }
-      .page-flip-out::after {
-        opacity: 1;
-        transition: opacity 0.35s ease-in;
-      }
-
-      /* Setup — new page waiting folded from the right */
-      .page-flip-in-setup {
-        transform: rotateY(90deg);
-        transition: none !important;
-      }
-      .page-flip-in-setup::after { opacity: 0; }
-
-      /* In — new page falls open smoothly, no overshoot */
-      .page-flip-in-active {
-        transform: rotateY(0deg);
-        transition: transform 0.5s cubic-bezier(0.2, 0, 0.3, 1);
-      }
-      .page-flip-in-active::after {
-        opacity: 0;
-        transition: opacity 0.4s ease-out;
+      .page-idle    { transform: rotateY(0deg); }
+      .page-flipping {
+        animation: comicPageFlip 0.7s cubic-bezier(0.4, 0, 0.2, 1) forwards;
       }
 
       /* Comic Pop Scroll Reveal */

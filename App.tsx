@@ -11,7 +11,7 @@ import Marquee from './components/Marquee';
 import CareerTimeline from './components/CareerTimeline';
 import { Star, Cpu, PenTool, Linkedin, Mail, Phone, ArrowDown, Box } from 'lucide-react';
 
-type AnimationState = 'idle' | 'out' | 'in-snap' | 'in';
+type AnimationState = 'idle' | 'flipping';
 
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<TabType>('Home');
@@ -45,38 +45,23 @@ const App: React.FC = () => {
 
   const handleTabChange = (tab: TabType) => {
     if (tab === activeTab) return;
-    
-    // Phase 1: Flip Out (Lift current page)
-    setFlipState('out');
 
-    // Phase 1 matches .page-flip-out: 350ms
+    // Start the CSS keyframe animation — runs entirely on the compositor
+    setFlipState('flipping');
+
+    // Swap content at the midpoint (45% of 700ms) when page is edge-on and invisible
     setTimeout(() => {
       setActiveTab(tab);
       window.scrollTo({ top: 0, behavior: 'instant' });
-      setFlipState('in-snap');
+    }, 315);
 
-      requestAnimationFrame(() => {
-        setTimeout(() => setFlipState('in'), 20);
-      });
-
-      // Cleanup after in-active finishes: 20ms + 500ms + buffer
-      setTimeout(() => setFlipState('idle'), 560);
-
-    }, 350); 
+    // Reset after the full animation completes
+    setTimeout(() => setFlipState('idle'), 750);
   };
 
-  const handleNavToProjects = () => {
-    handleTabChange('Projects');
-  };
+  const handleNavToProjects = () => handleTabChange('Projects');
 
-  const getPageClass = () => {
-    switch(flipState) {
-      case 'out': return 'page-flip-out';
-      case 'in-snap': return 'page-flip-in-setup';
-      case 'in': return 'page-flip-in-active';
-      default: return 'page-idle';
-    }
-  };
+  const getPageClass = () => flipState === 'flipping' ? 'page-flipping' : 'page-idle';
 
   const renderHome = () => (
           <div className="space-y-16">
