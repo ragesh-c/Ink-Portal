@@ -375,17 +375,24 @@ const App: React.FC = () => {
            />
 
            {/* Dynamic Content Panel with 3D Flip Effect */}
-           {/* All three tabs stay mounted — only visibility toggles, so images stay cached */}
-           <div className={`h-full transform-style-3d ${getPageClass()}`}>
-             <div style={{ display: activeTab === 'Home' ? 'block' : 'none' }}>
-               {renderHome()}
-             </div>
-             <div style={{ display: activeTab === 'Projects' ? 'block' : 'none' }}>
-               {renderProjects()}
-             </div>
-             <div style={{ display: activeTab === 'About Me' ? 'block' : 'none' }}>
-               {renderAbout()}
-             </div>
+           {/* Tabs stay mounted; inactive ones use visibility+absolute so no layout
+               recalculation fires mid-transition (display:none causes reflow stutter) */}
+           <div className={`transform-style-3d ${getPageClass()}`} style={{ position: 'relative' }}>
+             {(['Home', 'Projects', 'About Me'] as const).map((tab) => (
+               <div
+                 key={tab}
+                 style={{
+                   position: activeTab === tab ? 'relative' : 'absolute',
+                   top: 0, left: 0, width: '100%',
+                   visibility: activeTab === tab ? 'visible' : 'hidden',
+                   pointerEvents: activeTab === tab ? 'auto' : 'none',
+                 }}
+               >
+                 {tab === 'Home' && renderHome()}
+                 {tab === 'Projects' && renderProjects()}
+                 {tab === 'About Me' && renderAbout()}
+               </div>
+             ))}
            </div>
       </main>
 
