@@ -48,30 +48,21 @@ const App: React.FC = () => {
     
     // Phase 1: Flip Out (Lift current page)
     setFlipState('out');
-    
-    // Wait for the flip-out transition (400ms)
+
+    // Phase 1 matches .page-flip-out: 350ms
     setTimeout(() => {
-      // Phase 2: Logic Swap & Snap
       setActiveTab(tab);
       window.scrollTo({ top: 0, behavior: 'instant' });
-      
-      // Snap to the incoming position (leaning right)
       setFlipState('in-snap');
-      
-      // Phase 3: Flip In (Drop new page)
-      // Slight delay to ensure DOM update and snap render
+
       requestAnimationFrame(() => {
-        setTimeout(() => {
-          setFlipState('in');
-        }, 50);
+        setTimeout(() => setFlipState('in'), 20);
       });
 
-      // Cleanup: Reset to idle after the elastic bounce finishes (600ms)
-      setTimeout(() => {
-        setFlipState('idle');
-      }, 700); // 50ms + 650ms buffer
-      
-    }, 400); 
+      // Cleanup after in-active finishes: 20ms + 500ms + buffer
+      setTimeout(() => setFlipState('idle'), 560);
+
+    }, 350); 
   };
 
   const handleNavToProjects = () => {
@@ -87,10 +78,7 @@ const App: React.FC = () => {
     }
   };
 
-  const renderContent = () => {
-    switch (activeTab) {
-      case 'Home':
-        return (
+  const renderHome = () => (
           <div className="space-y-16">
             {/* Intro Panel */}
             <section className="grid md:grid-cols-12 gap-8 relative items-stretch">
@@ -213,124 +201,103 @@ const App: React.FC = () => {
               </div>
             </section>
           </div>
-        );
+  );
 
-      case 'Projects':
-        return (
-          <div>
-             <ScrollReveal>
-               <div className="flex items-center gap-4 mb-8">
-                  <h3 className="font-comic text-4xl uppercase bg-secondary px-6 py-2 border-4 border-ink shadow-comic transform -rotate-1">Full Archive</h3>
-                  <span className="font-sans text-gray-500 font-bold hidden md:inline-block border-b-4 border-gray-300 pb-1">// SELECT A PANEL TO VIEW</span>
-               </div>
-             </ScrollReveal>
-             
-             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-12">
-               {PROJECTS_DATA.map((project, index) => (
-                 <ScrollReveal key={project.id} delay={index * 50}>
-                   <ProjectCard project={project} onClick={handleProjectClick} />
-                 </ScrollReveal>
-               ))}
-             </div>
-          </div>
-        );
+  const renderProjects = () => (
+    <div>
+      <div className="flex items-center gap-4 mb-8">
+        <h3 className="font-comic text-4xl uppercase bg-secondary px-6 py-2 border-4 border-ink shadow-comic transform -rotate-1">Full Archive</h3>
+        <span className="font-sans text-gray-500 font-bold hidden md:inline-block border-b-4 border-gray-300 pb-1">// SELECT A PANEL TO VIEW</span>
+      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-12">
+        {PROJECTS_DATA.map((project) => (
+          <ProjectCard key={project.id} project={project} onClick={handleProjectClick} />
+        ))}
+      </div>
+    </div>
+  );
 
-      case 'About Me':
-        return (
-          <div className="space-y-8 relative isolate">
-             {/* Full Width Career Timeline */}
-             <ScrollReveal>
-                <CareerTimeline data={CAREER_TIMELINE_DATA} />
-             </ScrollReveal>
+  const renderAbout = () => (
+    <div className="space-y-8 relative isolate">
+      <CareerTimeline data={CAREER_TIMELINE_DATA} />
 
-             <div className="grid md:grid-cols-12 gap-8 relative">
-              {/* Bio Column */}
-              <div className="md:col-span-7 space-y-8">
-                <ScrollReveal delay={100}>
-                  <MagneticTilt intensity={2}>
-                    <ComicPanel className="p-8">
-                      <div className="flex items-center gap-3 mb-6">
-                        <div className="bg-accent p-2 border-2 border-ink shadow-comic-sm">
-                          <Star className="text-white" size={24} />
-                        </div>
-                        <h2 className="font-comic text-4xl uppercase text-stroke-white drop-shadow-md">Origin Story</h2>
-                      </div>
-                      <p className="font-sans text-lg leading-relaxed whitespace-pre-line">
-                        {ABOUT_DATA.bio}
-                      </p>
-                    </ComicPanel>
-                  </MagneticTilt>
-                </ScrollReveal>
-
-                <ScrollReveal delay={200}>
-                  <ComicPanel variant="yellow" className="p-8 transform rotate-1 transition-transform hover:rotate-2">
-                    <div className="flex items-center gap-3 mb-4">
-                      <div className="bg-ink p-2">
-                        <Cpu className="text-white" size={20} />
-                      </div>
-                      <h3 className="font-comic text-2xl uppercase">Philosophy</h3>
-                    </div>
-                    <p className="font-sans font-medium italic text-lg border-l-4 border-ink pl-4">
-                      "{ABOUT_DATA.philosophy}"
-                    </p>
-                  </ComicPanel>
-                </ScrollReveal>
-              </div>
-
-              {/* Stats / Tech Stack Column */}
-              <div className="md:col-span-5 space-y-8">
-                <ScrollReveal delay={300}>
-                  <MagneticTilt intensity={5}>
-                    <ComicPanel variant="white" className="p-6">
-                      <h3 className="font-comic text-2xl mb-4 text-center bg-ink text-white py-2 uppercase border-2 border-transparent">Tech Stack</h3>
-                      
-                      <div className="grid grid-cols-2 gap-3 mt-4">
-                          {ABOUT_DATA.toolStack.map((tool) => (
-                            <div key={tool.name} className="flex flex-col items-center justify-center p-4 border-2 border-ink bg-gray-50 hover:bg-white hover-comic-pop transition-all text-center group cursor-default">
-                              <div className="w-10 h-10 mb-2 flex items-center justify-center transform group-hover:scale-125 transition-transform">
-                                <img 
-                                  src={tool.logo} 
-                                  alt={`${tool.name} Logo`} 
-                                  className="w-full h-full object-contain"
-                                />
-                              </div>
-                              <span className="font-bold font-sans text-sm group-hover:text-accent transition-colors">{tool.name}</span>
-                            </div>
-                          ))}
-                      </div>
-                      
-                      <div className="mt-6 text-center">
-                          <p className="font-comic text-gray-400 text-sm tracking-widest">ARSENAL LOADED</p>
-                      </div>
-                    </ComicPanel>
-                  </MagneticTilt>
-                </ScrollReveal>
-                
-
-                <ScrollReveal delay={400}>
-                  <div className="grid grid-cols-2 gap-4">
-                    <MagneticTilt>
-                      <div className="bg-ink text-white p-4 border-4 border-black text-center shadow-comic hover-comic-pop h-full flex flex-col items-center justify-center">
-                        <PenTool className="mx-auto mb-2" />
-                        <div className="font-comic text-xl">UX</div>
-                      </div>
-                    </MagneticTilt>
-                    <MagneticTilt>
-                      <div className="bg-accent text-white p-4 border-4 border-ink text-center shadow-comic hover-comic-pop h-full flex flex-col items-center justify-center">
-                        <Box className="mx-auto mb-2" />
-                        <div className="font-comic text-xl">3D Animation</div>
-                      </div>
-                    </MagneticTilt>
+      <div className="grid md:grid-cols-12 gap-8 relative">
+        {/* Bio Column */}
+        <div className="md:col-span-7 space-y-8">
+          <ScrollReveal delay={100}>
+            <MagneticTilt intensity={2}>
+              <ComicPanel className="p-8">
+                <div className="flex items-center gap-3 mb-6">
+                  <div className="bg-accent p-2 border-2 border-ink shadow-comic-sm">
+                    <Star className="text-white" size={24} />
                   </div>
-                </ScrollReveal>
+                  <h2 className="font-comic text-4xl uppercase text-stroke-white drop-shadow-md">Origin Story</h2>
+                </div>
+                <p className="font-sans text-lg leading-relaxed whitespace-pre-line">
+                  {ABOUT_DATA.bio}
+                </p>
+              </ComicPanel>
+            </MagneticTilt>
+          </ScrollReveal>
+
+          <ScrollReveal delay={200}>
+            <ComicPanel variant="yellow" className="p-8 transform rotate-1 transition-transform hover:rotate-2">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="bg-ink p-2">
+                  <Cpu className="text-white" size={20} />
+                </div>
+                <h3 className="font-comic text-2xl uppercase">Philosophy</h3>
               </div>
+              <p className="font-sans font-medium italic text-lg border-l-4 border-ink pl-4">
+                "{ABOUT_DATA.philosophy}"
+              </p>
+            </ComicPanel>
+          </ScrollReveal>
+        </div>
+
+        {/* Tech Stack Column */}
+        <div className="md:col-span-5 space-y-8">
+          <ScrollReveal delay={300}>
+            <MagneticTilt intensity={5}>
+              <ComicPanel variant="white" className="p-6">
+                <h3 className="font-comic text-2xl mb-4 text-center bg-ink text-white py-2 uppercase border-2 border-transparent">Tech Stack</h3>
+                <div className="grid grid-cols-2 gap-3 mt-4">
+                  {ABOUT_DATA.toolStack.map((tool) => (
+                    <div key={tool.name} className="flex flex-col items-center justify-center p-4 border-2 border-ink bg-gray-50 hover:bg-white hover-comic-pop transition-all text-center group cursor-default">
+                      <div className="w-10 h-10 mb-2 flex items-center justify-center transform group-hover:scale-125 transition-transform">
+                        <img src={tool.logo} alt={`${tool.name} Logo`} className="w-full h-full object-contain" />
+                      </div>
+                      <span className="font-bold font-sans text-sm group-hover:text-accent transition-colors">{tool.name}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="mt-6 text-center">
+                  <p className="font-comic text-gray-400 text-sm tracking-widest">ARSENAL LOADED</p>
+                </div>
+              </ComicPanel>
+            </MagneticTilt>
+          </ScrollReveal>
+
+          <ScrollReveal delay={400}>
+            <div className="grid grid-cols-2 gap-4">
+              <MagneticTilt>
+                <div className="bg-ink text-white p-4 border-4 border-black text-center shadow-comic hover-comic-pop h-full flex flex-col items-center justify-center">
+                  <PenTool className="mx-auto mb-2" />
+                  <div className="font-comic text-xl">UX</div>
+                </div>
+              </MagneticTilt>
+              <MagneticTilt>
+                <div className="bg-accent text-white p-4 border-4 border-ink text-center shadow-comic hover-comic-pop h-full flex flex-col items-center justify-center">
+                  <Box className="mx-auto mb-2" />
+                  <div className="font-comic text-xl">3D Animation</div>
+                </div>
+              </MagneticTilt>
             </div>
-          </div>
-        );
-      default:
-        return null;
-    }
-  };
+          </ScrollReveal>
+        </div>
+      </div>
+    </div>
+  );
 
   return (
     <div className="min-h-screen w-full bg-paper paper-texture border-x-4 border-y-4 md:border-x-8 md:border-y-8 border-ink font-sans selection:bg-accent selection:text-white flex flex-col relative overflow-x-hidden">
@@ -408,8 +375,17 @@ const App: React.FC = () => {
            />
 
            {/* Dynamic Content Panel with 3D Flip Effect */}
+           {/* All three tabs stay mounted — only visibility toggles, so images stay cached */}
            <div className={`h-full transform-style-3d ${getPageClass()}`}>
-             {renderContent()}
+             <div style={{ display: activeTab === 'Home' ? 'block' : 'none' }}>
+               {renderHome()}
+             </div>
+             <div style={{ display: activeTab === 'Projects' ? 'block' : 'none' }}>
+               {renderProjects()}
+             </div>
+             <div style={{ display: activeTab === 'About Me' ? 'block' : 'none' }}>
+               {renderAbout()}
+             </div>
            </div>
       </main>
 

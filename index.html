@@ -7,7 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Dancing+Script:wght@500;700&family=Special+Elite&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Dancing+Script:wght@500;700&family=Special+Elite&family=Press+Start+2P&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <script>
       tailwind.config = {
         theme: {
@@ -92,59 +92,67 @@
         paint-order: stroke fill;
       }
 
-      /* 3D Flip Animations */
+      /* ── Comic Page Flip ── */
       .perspective-1000 {
-        perspective: 2500px;
-        perspective-origin: 50% 50%;
+        perspective: 1600px;
+        perspective-origin: 50% 40%;
       }
-      
+
       .transform-style-3d {
         transform-style: preserve-3d;
         transform-origin: left center;
-        backface-visibility: hidden;
         position: relative;
         will-change: transform;
       }
-      
-      /* Shadow Overlay for Paper Curl Effect */
+
+      /* Soft shadow that builds as the page lifts */
       .transform-style-3d::after {
         content: "";
         position: absolute;
         inset: 0;
-        background: linear-gradient(to right, rgba(0,0,0,0.05), rgba(255,255,255,0.2) 10%, rgba(0,0,0,0.1) 90%, rgba(0,0,0,0.2));
+        background: linear-gradient(
+          to right,
+          transparent 50%,
+          rgba(0,0,0,0.06) 75%,
+          rgba(0,0,0,0.2) 100%
+        );
         opacity: 0;
         pointer-events: none;
-        transition: opacity 0.4s;
         z-index: 50;
       }
 
-      /* Animation States */
+      /* Idle */
       .page-idle {
-        transform: rotateY(0deg) skewY(0deg);
-        filter: brightness(1);
+        transform: rotateY(0deg);
       }
-      .page-idle::after { opacity: 0; }
+      .page-idle::after { opacity: 0; transition: opacity 0.3s; }
 
+      /* Out — page lifts and folds away, steady pace */
       .page-flip-out {
-        transform: rotateY(-85deg) skewY(-5deg);
-        opacity: 1;
-        transition: transform 0.4s ease-in;
+        transform: rotateY(-90deg);
+        transition: transform 0.35s cubic-bezier(0.4, 0, 0.8, 1);
       }
-      .page-flip-out::after { opacity: 0.5; transition: opacity 0.4s ease-in; }
-      
-      .page-flip-in-setup {
-        transform: rotateY(85deg) skewY(5deg);
+      .page-flip-out::after {
         opacity: 1;
+        transition: opacity 0.35s ease-in;
+      }
+
+      /* Setup — new page waiting folded from the right */
+      .page-flip-in-setup {
+        transform: rotateY(90deg);
         transition: none !important;
       }
-      .page-flip-in-setup::after { opacity: 0.5; }
+      .page-flip-in-setup::after { opacity: 0; }
 
+      /* In — new page falls open smoothly, no overshoot */
       .page-flip-in-active {
-        transform: rotateY(0deg) skewY(0deg);
-        opacity: 1;
-        transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+        transform: rotateY(0deg);
+        transition: transform 0.5s cubic-bezier(0.2, 0, 0.3, 1);
       }
-      .page-flip-in-active::after { opacity: 0; transition: opacity 0.6s ease-out; }
+      .page-flip-in-active::after {
+        opacity: 0;
+        transition: opacity 0.4s ease-out;
+      }
 
       /* Comic Pop Scroll Reveal */
       @keyframes comicPopReveal {
