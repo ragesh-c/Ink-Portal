@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { CareerItem } from '../types';
-import ComicPanel from './ComicPanel';
 
 interface CareerTimelineProps {
   data: CareerItem[];
@@ -16,6 +15,103 @@ const LOGS: Record<string, string> = {
   'c-05': "Three years at McKinsey. Proper outfit. Learned what's inside a corporate machine. Glad I did. Gladder I left.",
   'c-06': "Where it all started. Bharathiar University, 2016–2019. Figured out early I was more drawn to how things look than how they calculate.",
 };
+
+
+// ── Badge SVGs ──
+const BadgeStar = ({ glow }: { glow?: boolean }) => (
+  <svg viewBox="0 0 48 48" fill="none">
+    {glow && <circle cx="24" cy="24" r="21" fill="#fbbf24" opacity="0.2" className="animate-ping" style={{ animationDuration: '2.5s' }} />}
+    <polygon points="24,3 27.5,16 40,10 33,22 46,24 33,26 40,38 27.5,32 24,45 20.5,32 8,38 15,26 2,24 15,22 8,10 20.5,16"
+      fill="#fbbf24" stroke="#0a0a0a" strokeWidth="1.5" strokeLinejoin="round" />
+    <circle cx="24" cy="24" r="4" fill="rgba(0,0,0,0.2)" />
+    <circle cx="24" cy="24" r="2.5" fill="#fffbeb" opacity="0.9" />
+    <ellipse cx="17" cy="14" rx="4" ry="1.8" fill="white" opacity="0.4" transform="rotate(-35 17 14)" />
+  </svg>
+);
+const BadgeDiamond = () => (
+  <svg viewBox="0 0 48 48" fill="none">
+    <polygon points="24,3 44,24 24,45 4,24" fill="#60a5fa" stroke="#0a0a0a" strokeWidth="1.5" strokeLinejoin="round" />
+    <polygon points="24,10 37,24 24,38 11,24" fill="#93c5fd" opacity="0.4" />
+    <polygon points="24,17 31,24 24,31 17,24" fill="white" opacity="0.35" />
+    <ellipse cx="18" cy="15" rx="3.5" ry="1.6" fill="white" opacity="0.5" transform="rotate(-35 18 15)" />
+  </svg>
+);
+const BadgeHex = () => (
+  <svg viewBox="0 0 48 48" fill="none">
+    <polygon points="24,3 42,13.5 42,34.5 24,45 6,34.5 6,13.5" fill="#f97316" stroke="#0a0a0a" strokeWidth="1.5" strokeLinejoin="round" />
+    <rect x="15" y="19" width="18" height="10" rx="1" fill="white" opacity="0.2" />
+    <rect x="15" y="19" width="4" height="3" rx="0.5" fill="white" opacity="0.5" />
+    <rect x="29" y="19" width="4" height="3" rx="0.5" fill="white" opacity="0.5" />
+    <rect x="15" y="26" width="4" height="3" rx="0.5" fill="white" opacity="0.5" />
+    <rect x="29" y="26" width="4" height="3" rx="0.5" fill="white" opacity="0.5" />
+    <polygon points="21,21 21,27 29,24" fill="white" opacity="0.7" />
+    <ellipse cx="17" cy="12" rx="3.5" ry="1.6" fill="white" opacity="0.38" transform="rotate(-35 17 12)" />
+  </svg>
+);
+const BadgeShield = () => (
+  <svg viewBox="0 0 48 48" fill="none">
+    <path d="M24 3 L42 10 L42 26 Q42 38 24 45 Q6 38 6 26 L6 10 Z" fill="#8b5cf6" stroke="#0a0a0a" strokeWidth="1.5" strokeLinejoin="round" />
+    <path d="M24 9 L37 15 L37 26 Q37 34 24 40 Q11 34 11 26 L11 15 Z" fill="#a78bfa" opacity="0.4" />
+    <rect x="17" y="19" width="14" height="10" rx="1" fill="white" opacity="0.25" />
+    <line x1="24" y1="19" x2="24" y2="29" stroke="white" strokeWidth="1" opacity="0.55" />
+    <line x1="18" y1="22" x2="23" y2="22" stroke="white" strokeWidth="0.8" opacity="0.45" />
+    <line x1="18" y1="25" x2="23" y2="25" stroke="white" strokeWidth="0.8" opacity="0.45" />
+    <ellipse cx="17" cy="12" rx="3.5" ry="1.6" fill="white" opacity="0.38" transform="rotate(-35 17 12)" />
+  </svg>
+);
+const BadgeCompass = () => (
+  <svg viewBox="0 0 48 48" fill="none">
+    <circle cx="24" cy="24" r="20" fill="#10b981" stroke="#0a0a0a" strokeWidth="1.5" />
+    <polygon points="24,5 27,21 24,19 21,21"  fill="white" opacity="0.9" />
+    <polygon points="24,43 27,27 24,29 21,27" fill="white" opacity="0.35" />
+    <polygon points="5,24 21,21 19,24 21,27"  fill="white" opacity="0.45" />
+    <polygon points="43,24 27,21 29,24 27,27" fill="white" opacity="0.45" />
+    <circle cx="24" cy="24" r="3" fill="rgba(0,0,0,0.25)" />
+    <circle cx="24" cy="24" r="1.5" fill="white" opacity="0.9" />
+    <ellipse cx="17" cy="13" rx="3.5" ry="1.6" fill="white" opacity="0.38" transform="rotate(-35 17 13)" />
+  </svg>
+);
+const BadgePenta = () => (
+  <svg viewBox="0 0 48 48" fill="none">
+    <polygon points="24,3 44,17 37,41 11,41 4,17" fill="#ef4444" stroke="#0a0a0a" strokeWidth="1.5" strokeLinejoin="round" />
+    <rect x="16" y="30" width="4" height="8"  fill="white" opacity="0.3" />
+    <rect x="22" y="24" width="4" height="14" fill="white" opacity="0.5" />
+    <rect x="28" y="27" width="4" height="11" fill="white" opacity="0.4" />
+    <path d="M18 22 L24 15 L30 22" stroke="white" strokeWidth="1.5" fill="none" strokeLinecap="round" strokeLinejoin="round" opacity="0.75" />
+    <ellipse cx="17" cy="10" rx="3.5" ry="1.6" fill="white" opacity="0.38" transform="rotate(-35 17 10)" />
+  </svg>
+);
+const BadgeArch = () => (
+  <svg viewBox="0 0 48 48" fill="none">
+    <path d="M4 44 L4 20 L12 12 L12 20 L24 8 L36 20 L36 12 L44 20 L44 44 Z" fill="#0ea5e9" stroke="#0a0a0a" strokeWidth="1.5" strokeLinejoin="round" />
+    <rect x="11" y="28" width="5" height="16" fill="white" opacity="0.28" />
+    <rect x="21" y="28" width="6" height="16" fill="white" opacity="0.28" />
+    <rect x="32" y="28" width="5" height="16" fill="white" opacity="0.28" />
+    <line x1="8" y1="28" x2="40" y2="28" stroke="white" strokeWidth="1.2" opacity="0.45" />
+    <ellipse cx="17" cy="14" rx="3.5" ry="1.6" fill="white" opacity="0.38" transform="rotate(-35 17 14)" />
+  </svg>
+);
+const BadgeBolt = () => (
+  <svg viewBox="0 0 48 48" fill="none">
+    <polygon points="16,3 32,3 45,16 45,32 32,45 16,45 3,32 3,16" fill="#6b7280" stroke="#0a0a0a" strokeWidth="1.5" strokeLinejoin="round" />
+    <polygon points="18,7 30,7 41,18 41,30 30,41 18,41 7,30 7,18" fill="#9ca3af" opacity="0.35" />
+    <path d="M28 12 L20 24 L25 24 L20 36 L28 24 L23 24 Z" fill="white" opacity="0.82" />
+    <ellipse cx="17" cy="12" rx="3.5" ry="1.6" fill="white" opacity="0.38" transform="rotate(-35 17 12)" />
+  </svg>
+);
+
+const BADGE_COMPONENTS: Record<string, React.FC<{ glow?: boolean }>> = {
+  'c-00': BadgeStar,
+  'c-01': BadgeDiamond,
+  'c-02': BadgeHex,
+  'c-03': BadgeShield,
+  'c-04': BadgeCompass,
+  'c-05': BadgePenta,
+  'c-06': BadgeArch,
+  'sq':   BadgeBolt,
+};
+
+const px = { fontFamily: "'Press Start 2P', monospace" } as const;
 
 // ── Pencil-style SVG Sketches ──
 const SketchLaptop = () => (
@@ -141,82 +237,166 @@ const SKETCHES: Record<string, React.FC> = {
   'c-04': SketchCompass,
   'c-05': SketchEasel,
   'c-06': SketchCampus,
+  'sq':   SketchController,
 };
 
+const SIDE_QUEST = {
+  id: 'sq', role: 'QA Tester', organization: 'Electronic Arts & Glowmade',
+  period: 'Invite-Only', type: 'Work' as const,
+};
+const SIDE_QUEST_LOG = "Got word from EA — invite only. The kind you don't turn down. Played builds that weren't finished yet. Found what was broken, wrote it down proper. Evaluated balance, flow, what it actually felt like to play. Did the same for Glowmade. Quiet work. Honest work.";
+
 const CareerTimeline: React.FC<CareerTimelineProps> = ({ data }) => {
-  const current  = data[0];
-  const rest     = data.slice(1);
+  const [selectedId, setSelectedId]     = useState('c-00');
+
+  const allEntries  = [...data, SIDE_QUEST];
+  const selected   = allEntries.find(e => e.id === selectedId) ?? allEntries[0];
+  const SelBadge   = BADGE_COMPONENTS[selectedId] ?? BadgeStar;
+  const SelSketch  = SKETCHES[selectedId] ?? SketchLaptop;
+  const selLog     = selectedId === 'sq' ? SIDE_QUEST_LOG : (LOGS[selectedId] ?? '');
+  const isCurrent  = selectedId === 'c-00';
+  const isSideQ    = selectedId === 'sq';
 
   return (
     <div className="w-full">
 
-      {/* ── Section Header ── */}
-      <div className="bg-ink text-white border-4 border-ink shadow-comic mb-6 overflow-hidden relative">
-        <div className="absolute inset-0 halftone-pattern pointer-events-none mix-blend-overlay opacity-30 z-0" />
-        <div className="relative z-10 p-6 flex flex-col md:flex-row md:items-end gap-2 justify-between">
-          <div>
-            <p className="font-sans text-xs text-secondary tracking-[0.3em] uppercase opacity-70 mb-1">
-              Field Operations &amp; Academic Missions
-            </p>
-            <h3 className="font-comic text-5xl md:text-6xl uppercase leading-none tracking-wide">
-              Career Quest Log
-            </h3>
-          </div>
-          <span className="font-comic text-secondary text-2xl opacity-60 hidden md:block">
-            {data.length} Entries
-          </span>
-        </div>
-        {/* Bottom accent stripe */}
-        <div className="h-3 bg-secondary relative z-10" />
-      </div>
+      {/* ── Pokédex Side-by-Side ── */}
+      <div className="border-4 border-ink shadow-comic overflow-hidden">
 
-      {/* ── Current Role — Hero Card ── */}
-      {current && (() => {
-        const Sketch = SKETCHES[current.id] ?? SketchLaptop;
-        return (
-          <div className="mb-6">
-            <ComicPanel className="overflow-hidden hover:shadow-comic-hover transition-shadow duration-300" variant="white">
-              {/* Yellow "current level" header bar */}
-              <div className="bg-secondary border-b-4 border-ink px-5 py-2 flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  {/* Pulsing live indicator */}
-                  <span className="relative flex h-3 w-3">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
-                    <span className="relative inline-flex rounded-full h-3 w-3 bg-accent border border-ink"></span>
+        {/* ── Top bar ── */}
+        <div className="bg-ink px-4 py-2 flex items-center gap-3 border-b-4 border-ink">
+          <div className="flex gap-1.5">
+            <div className="w-3 h-3 rounded-full bg-accent" />
+            <div className="w-3 h-3 rounded-full bg-secondary" />
+            <div className="w-3 h-3 rounded-full bg-[#4ade80]" />
+          </div>
+          <span className="font-comic text-secondary text-xl uppercase tracking-wide">Career Quest Log</span>
+          <span className="ml-auto" style={{ ...px, fontSize: '9px', color: '#4ade80' }}>CAREER DEX v1.0</span>
+        </div>
+
+        {/* ── Main two-panel area ── */}
+        <div className="flex flex-col md:flex-row" style={{ minHeight: '480px' }}>
+
+          {/* LEFT — Badge list nav */}
+          <div
+            className="md:w-[40%] flex-shrink-0 flex flex-col border-b-4 md:border-b-0 md:border-r-4 border-ink overflow-y-auto"
+            style={{ background: '#0a1628' }}
+          >
+            {/* Panel label */}
+            <div className="px-4 py-3 border-b border-[#1f2937]" style={{ background: '#0a1628' }}>
+              <p style={{ ...px, fontSize: '8px', color: '#4ade80' }}>SELECT MISSION</p>
+            </div>
+
+            {/* Badge entries */}
+            {allEntries.map((entry) => {
+              const BadgeComp  = BADGE_COMPONENTS[entry.id];
+              const isSelected = selectedId === entry.id;
+              const isCurr     = entry.id === 'c-00';
+              const isSQ       = entry.id === 'sq';
+              return (
+                <button
+                  key={entry.id}
+                  onClick={() => setSelectedId(entry.id)}
+                  className="w-full flex items-center gap-3 px-4 py-3 text-left transition-all duration-150 border-b border-[#1a2640]"
+                  style={{
+                    background: isSelected ? '#111d2e' : 'transparent',
+                    borderLeft: isSelected ? '3px solid #fbbf24' : '3px solid transparent',
+                  }}
+                >
+                  {/* Badge icon */}
+                  <div
+                    className="w-8 h-8 flex-shrink-0 transition-all duration-150"
+                    style={{ opacity: isSelected ? 1 : 0.6, transform: isSelected ? 'scale(1.1)' : 'scale(1)' }}
+                  >
+                    {BadgeComp && <BadgeComp glow={isSelected && isCurr} />}
+                  </div>
+                  {/* Text */}
+                  <div className="min-w-0 flex-1">
+                    <p
+                      className="font-comic text-sm uppercase leading-tight truncate"
+                      style={{ color: isSelected ? '#fbbf24' : '#e5e7eb' }}
+                    >
+                      {entry.role}
+                    </p>
+                    <p className="font-sans text-[10px] truncate" style={{ color: '#6b7280' }}>
+                      {entry.organization}
+                    </p>
+                  </div>
+                  {/* Status dot */}
+                  {isCurr && (
+                    <span className="flex-shrink-0 relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
+                    </span>
+                  )}
+                  {isSQ && !isSelected && (
+                    <span className="flex-shrink-0 font-comic text-[10px] text-[#a78bfa]">SQ</span>
+                  )}
+                </button>
+              );
+            })}
+
+            {/* Future slot */}
+            <div
+              className="flex items-center gap-3 px-4 py-3 opacity-30"
+              style={{ borderLeft: '3px solid transparent' }}
+            >
+              <div
+                className="w-8 h-8 flex-shrink-0 flex items-center justify-center"
+                style={{ border: '2px dashed #374151' }}
+              >
+                <span style={{ ...px, fontSize: '9px', color: '#374151' }}>?</span>
+              </div>
+              <p className="font-comic text-sm uppercase text-gray-600">Next Chapter</p>
+            </div>
+          </div>
+
+          {/* RIGHT — Selected detail */}
+          <div className="flex-1 flex flex-col" style={{ background: '#fcfbf7' }}>
+
+            {/* Status bar — matches left panel header exactly */}
+            <div className="flex items-center justify-between px-5 py-3 border-b border-[#1f2937]" style={{ background: '#0a1628' }}>
+              <div className="flex items-center gap-3">
+                {isCurrent && (
+                  <span className="relative flex h-2 w-2">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
                   </span>
-                  <span className="font-comic text-lg uppercase tracking-wide text-ink">
-                    ★ Current Level
-                  </span>
-                </div>
-                <span className="font-sans text-xs font-bold text-ink opacity-50 uppercase tracking-widest hidden md:block">
-                  {current.period}
+                )}
+                <span className="font-comic text-sm uppercase tracking-wide" style={{ color: isCurrent ? '#fbbf24' : isSideQ ? '#a78bfa' : '#4ade80' }}>
+                  {isCurrent ? '★ Current Level' : isSideQ ? '⊕ Side Quest' : '✓ Mission Complete'}
                 </span>
               </div>
+              <span className="font-sans text-xs font-bold uppercase tracking-widest hidden md:block" style={{ color: '#6b7280' }}>
+                {selected?.period}
+              </span>
+            </div>
 
-              {/* Card body */}
-              <div className="flex flex-col md:flex-row">
-                {/* Text */}
-                <div className="flex-1 p-6 md:p-8">
-                  <span className="font-sans text-xs font-bold text-ink opacity-40 uppercase tracking-widest md:hidden block mb-2">
-                    {current.period}
-                  </span>
-                  <h4 className="font-comic text-5xl md:text-6xl leading-tight uppercase text-ink mb-2">
-                    {current.role}
-                  </h4>
-                  <p className="font-sans font-extrabold text-lg text-gray-700 mb-5">
-                    {current.organization}
-                  </p>
-                  <p className="font-sans text-base text-gray-700 leading-relaxed italic border-l-4 border-secondary pl-4">
-                    {LOGS[current.id]}
-                  </p>
+            {/* Content row */}
+            <div className="flex flex-col md:flex-row flex-1">
+
+              {/* Text */}
+              <div className="flex-1 p-6 md:p-8">
+                <h4 className="font-comic text-5xl md:text-6xl leading-tight uppercase text-ink mb-2">
+                  {selected?.role}
+                </h4>
+                <p className="font-sans font-extrabold text-lg text-gray-700 mb-5">
+                  {selected?.organization}
+                </p>
+                <p className={`font-sans text-base leading-relaxed italic border-l-4 pl-4 ${isSideQ ? 'border-[#a78bfa] text-gray-800' : isCurrent ? 'border-secondary text-gray-700' : 'border-ink/20 text-gray-700'}`}>
+                  {selLog}
+                </p>
+              </div>
+
+              {/* Badge + sketch + XP */}
+              <div className="w-full md:w-56 border-t-4 md:border-t-0 md:border-l-4 border-ink flex flex-col items-center justify-center gap-5 p-6">
+                <div className="w-16 h-16">
+                  <SelBadge glow={isCurrent} />
                 </div>
-
-                {/* Right: sketch + XP bar */}
-                <div className="w-full md:w-64 border-t-4 md:border-t-0 md:border-l-4 border-ink flex flex-col items-center justify-center gap-6 p-6 bg-paper">
-                  <div className="w-full opacity-65">
-                    <Sketch />
-                  </div>
-                  {/* XP bar */}
+                <div className="w-full opacity-65">
+                  <SelSketch />
+                </div>
+                {isCurrent && (
                   <div className="w-full">
                     <div className="flex justify-between mb-1">
                       <span className="font-comic text-xs text-ink opacity-50 uppercase">XP</span>
@@ -229,84 +409,15 @@ const CareerTimeline: React.FC<CareerTimelineProps> = ({ data }) => {
                       />
                     </div>
                   </div>
-                </div>
+                )}
               </div>
-            </ComicPanel>
-          </div>
-        );
-      })()}
-
-      {/* ── Past Entries Grid ── */}
-      <div className="grid md:grid-cols-2 gap-6 mb-6">
-        {rest.map((item) => {
-          const isWork  = item.type === 'Work';
-          const Sketch  = SKETCHES[item.id] ?? SketchLaptop;
-          return (
-            <ComicPanel key={item.id} className="flex flex-col h-full hover:shadow-comic-hover transition-shadow duration-300" variant="white">
-              {/* Card header */}
-              <div className={`flex items-center justify-between px-4 py-2 border-b-4 border-ink ${isWork ? 'bg-secondary' : 'bg-ink'}`}>
-                <span className={`font-comic text-sm tracking-wide uppercase ${isWork ? 'text-ink' : 'text-secondary'}`}>
-                  {isWork ? '⬡ Field Work' : '⬡ Academy'}
-                </span>
-                <span className={`font-sans text-[10px] font-bold uppercase tracking-widest ${isWork ? 'text-ink opacity-60' : 'text-white opacity-60'}`}>
-                  {item.period}
-                </span>
-              </div>
-              {/* Card body */}
-              <div className="p-5 flex-1 flex flex-col">
-                <div className="flex gap-4 mb-4">
-                  {/* Text */}
-                  <div className="flex-1 min-w-0">
-                    <h4 className="font-comic text-2xl leading-tight uppercase mb-1">{item.role}</h4>
-                    <p className="font-sans font-bold text-sm text-gray-600">{item.organization}</p>
-                  </div>
-                  {/* Sketch thumbnail */}
-                  <div className="w-20 flex-shrink-0 opacity-50">
-                    <Sketch />
-                  </div>
-                </div>
-                <p className="font-sans text-sm text-gray-700 leading-relaxed italic flex-1">
-                  {LOGS[item.id]}
-                </p>
-                <div className="mt-4 pt-3 border-t-2 border-gray-100 flex items-center gap-2">
-                  <div className="w-2 h-2 rounded-full bg-gray-300" />
-                  <span className="font-comic text-gray-400 text-xs uppercase tracking-widest">Mission Complete</span>
-                </div>
-              </div>
-            </ComicPanel>
-          );
-        })}
-      </div>
-
-      {/* ── Side Quest ── */}
-      <ComicPanel variant="yellow" className="overflow-hidden hover:shadow-comic-hover transition-shadow duration-300">
-        <div className="flex flex-col md:flex-row">
-          {/* Left */}
-          <div className="flex-1 p-6 md:p-8">
-            <div className="flex items-center gap-3 mb-4">
-              <span className="font-comic text-sm bg-ink text-secondary px-3 py-1 border-2 border-ink shadow-[2px_2px_0_rgba(0,0,0,0.4)]">
-                ⊕ SIDE QUEST
-              </span>
-              <span className="font-sans text-xs text-ink opacity-50 uppercase tracking-widest">
-                Invite-Only
-              </span>
-            </div>
-            <h4 className="font-comic text-4xl uppercase leading-tight mb-1">QA Tester</h4>
-            <p className="font-sans font-bold text-gray-800 text-lg mb-4">
-              Electronic Arts &amp; Glowmade
-            </p>
-            <p className="font-sans text-sm text-gray-800 leading-relaxed italic border-l-4 border-ink/30 pl-4">
-              Got word from EA — invite only. The kind you don't turn down. Played builds that weren't finished yet. Found what was broken, wrote it down proper. Evaluated balance, flow, and what it actually felt like to play. Did the same for Glowmade. Quiet work. Honest work.
-            </p>
-          </div>
-          {/* Right: sketch */}
-          <div className="w-full md:w-52 border-t-4 md:border-t-0 md:border-l-4 border-ink/30 flex items-center justify-center p-6 bg-black/5">
-            <div className="w-full opacity-60">
-              <SketchController />
             </div>
           </div>
         </div>
-      </ComicPanel>
+
+        {/* Yellow stripe */}
+        <div className="h-2.5 bg-secondary" />
+      </div>
 
     </div>
   );
