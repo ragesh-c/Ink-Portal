@@ -8,7 +8,6 @@ import ProjectModal from './components/ProjectModal';
 import ScrollReveal from './components/ScrollReveal';
 import MagneticTilt from './components/MagneticTilt';
 import Marquee from './components/Marquee';
-import SkillsChart from './components/SkillsChart';
 import CareerTimeline from './components/CareerTimeline';
 import { Star, Cpu, PenTool, Linkedin, Mail, Phone, ArrowDown, Box } from 'lucide-react';
 
@@ -307,17 +306,6 @@ const App: React.FC = () => {
                   </MagneticTilt>
                 </ScrollReveal>
                 
-                {/* Skills Chart */}
-                <ScrollReveal delay={350}>
-                  <MagneticTilt intensity={15}>
-                    <ComicPanel variant="white" className="p-4" noShadow>
-                      <div className="bg-secondary p-1 border-b-4 border-ink mb-2 -mx-4 -mt-4 text-center">
-                         <h3 className="font-comic text-xl uppercase">Skill Stats</h3>
-                      </div>
-                      <SkillsChart data={ABOUT_DATA.skills} />
-                    </ComicPanel>
-                  </MagneticTilt>
-                </ScrollReveal>
 
                 <ScrollReveal delay={400}>
                   <div className="grid grid-cols-2 gap-4">

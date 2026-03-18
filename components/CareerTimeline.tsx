@@ -260,18 +260,70 @@ const CareerTimeline: React.FC<CareerTimelineProps> = ({ data }) => {
   return (
     <div className="w-full">
 
-      {/* ── Pokédex Side-by-Side ── */}
-      <div className="border-4 border-ink shadow-comic overflow-hidden">
+      {/* ── Pokédex Device Body ── */}
+      <div style={{
+        background: 'linear-gradient(160deg, #e81010 0%, #cc0000 45%, #a80000 100%)',
+        borderRadius: '14px 14px 10px 10px',
+        padding: '18px 18px 14px 18px',
+        border: '3px solid #1a1a1a',
+        boxShadow: '0 10px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.18), 6px 6px 0 #1a1a1a',
+      }}>
 
-        {/* ── Top bar ── */}
-        <div className="bg-ink px-4 py-2 flex items-center gap-3 border-b-4 border-ink">
-          <div className="flex gap-1.5">
-            <div className="w-3 h-3 rounded-full bg-accent" />
-            <div className="w-3 h-3 rounded-full bg-secondary" />
-            <div className="w-3 h-3 rounded-full bg-[#4ade80]" />
+        {/* ── Top decorative bar (camera + lights + title) ── */}
+        <div className="flex items-center gap-3 mb-3">
+          {/* Camera eye */}
+          <div style={{
+            position: 'relative', width: '54px', height: '54px', borderRadius: '50%', flexShrink: 0,
+            background: 'linear-gradient(135deg, #93c5fd 0%, #3b82f6 55%, #1e40af 100%)',
+            border: '4px solid #1a1a1a',
+            boxShadow: '0 2px 10px rgba(0,0,0,0.5), inset 0 1px 3px rgba(255,255,255,0.3)',
+          }}>
+            <div style={{ position: 'absolute', top: '8px', left: '8px', width: '14px', height: '14px', borderRadius: '50%', background: 'rgba(255,255,255,0.65)' }} />
+            <div style={{ position: 'absolute', inset: '7px', borderRadius: '50%', border: '2px solid rgba(255,255,255,0.2)' }} />
           </div>
-          <span className="font-comic text-secondary text-xl uppercase tracking-wide">Career Quest Log</span>
-          <span className="ml-auto" style={{ ...px, fontSize: '9px', color: '#4ade80' }}>CAREER DEX v1.0</span>
+          {/* Indicator lights */}
+          <div className="flex gap-2 items-center">
+            <div style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#ff6b6b', border: '2px solid #1a1a1a', boxShadow: '0 0 6px rgba(255,80,80,0.7)' }} />
+            <div style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#fbbf24', border: '2px solid #1a1a1a', boxShadow: '0 0 6px rgba(251,191,36,0.7)' }} />
+            <div style={{ width: '11px', height: '11px', borderRadius: '50%', background: '#4ade80', border: '2px solid #1a1a1a', boxShadow: '0 0 6px rgba(74,222,128,0.7)' }} />
+          </div>
+          {/* Title */}
+          <span className="font-comic text-white text-2xl uppercase tracking-wide ml-2" style={{ textShadow: '1px 1px 0 rgba(0,0,0,0.4)' }}>Career Quest Log</span>
+          <span className="ml-auto" style={{ ...px, fontSize: '9px', color: 'rgba(255,255,255,0.45)' }}>CAREER DEX v1.0</span>
+        </div>
+
+        {/* ── Screen bezel ── */}
+        <div style={{
+          background: '#111111',
+          borderRadius: '6px',
+          padding: '8px',
+          boxShadow: 'inset 0 3px 10px rgba(0,0,0,0.7)',
+        }}>
+          <div style={{ borderRadius: '3px', overflow: 'hidden' }}>
+
+        {/* ── Shared header row — single flex row guarantees alignment ── */}
+        <div className="flex border-b border-[#1f2937]" style={{ background: '#0a1628' }}>
+          {/* Left label */}
+          <div className="md:w-[40%] flex-shrink-0 flex items-center px-4 py-3 border-r border-[#1f2937]">
+            <p style={{ ...px, fontSize: '8px', color: '#4ade80' }}>SELECT MISSION</p>
+          </div>
+          {/* Right status */}
+          <div className="flex-1 flex items-center justify-between px-5 py-3">
+            <div className="flex items-center gap-3">
+              {isCurrent && (
+                <span className="relative flex h-2 w-2">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
+                  <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
+                </span>
+              )}
+              <span className="font-comic text-sm uppercase tracking-wide" style={{ color: isCurrent ? '#fbbf24' : isSideQ ? '#a78bfa' : '#4ade80' }}>
+                {isCurrent ? '★ Current Level' : isSideQ ? '⊕ Side Quest' : '✓ Mission Complete'}
+              </span>
+            </div>
+            <span className="font-sans text-xs font-bold uppercase tracking-widest hidden md:block" style={{ color: '#6b7280' }}>
+              {selected?.period}
+            </span>
+          </div>
         </div>
 
         {/* ── Main two-panel area ── */}
@@ -282,10 +334,6 @@ const CareerTimeline: React.FC<CareerTimelineProps> = ({ data }) => {
             className="md:w-[40%] flex-shrink-0 flex flex-col border-b-4 md:border-b-0 md:border-r-4 border-ink overflow-y-auto"
             style={{ background: '#0a1628' }}
           >
-            {/* Panel label */}
-            <div className="px-4 py-3 border-b border-[#1f2937]" style={{ background: '#0a1628' }}>
-              <p style={{ ...px, fontSize: '8px', color: '#4ade80' }}>SELECT MISSION</p>
-            </div>
 
             {/* Badge entries */}
             {allEntries.map((entry) => {
@@ -313,12 +361,12 @@ const CareerTimeline: React.FC<CareerTimelineProps> = ({ data }) => {
                   {/* Text */}
                   <div className="min-w-0 flex-1">
                     <p
-                      className="font-comic text-sm uppercase leading-tight truncate"
+                      className="font-comic text-base uppercase leading-tight"
                       style={{ color: isSelected ? '#fbbf24' : '#e5e7eb' }}
                     >
                       {entry.role}
                     </p>
-                    <p className="font-sans text-[10px] truncate" style={{ color: '#6b7280' }}>
+                    <p className="font-sans text-xs" style={{ color: '#9ca3af' }}>
                       {entry.organization}
                     </p>
                   </div>
@@ -353,24 +401,6 @@ const CareerTimeline: React.FC<CareerTimelineProps> = ({ data }) => {
 
           {/* RIGHT — Selected detail */}
           <div className="flex-1 flex flex-col" style={{ background: '#fcfbf7' }}>
-
-            {/* Status bar — matches left panel header exactly */}
-            <div className="flex items-center justify-between px-5 py-3 border-b border-[#1f2937]" style={{ background: '#0a1628' }}>
-              <div className="flex items-center gap-3">
-                {isCurrent && (
-                  <span className="relative flex h-2 w-2">
-                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75" />
-                    <span className="relative inline-flex rounded-full h-2 w-2 bg-accent" />
-                  </span>
-                )}
-                <span className="font-comic text-sm uppercase tracking-wide" style={{ color: isCurrent ? '#fbbf24' : isSideQ ? '#a78bfa' : '#4ade80' }}>
-                  {isCurrent ? '★ Current Level' : isSideQ ? '⊕ Side Quest' : '✓ Mission Complete'}
-                </span>
-              </div>
-              <span className="font-sans text-xs font-bold uppercase tracking-widest hidden md:block" style={{ color: '#6b7280' }}>
-                {selected?.period}
-              </span>
-            </div>
 
             {/* Content row */}
             <div className="flex flex-col md:flex-row flex-1">
@@ -415,9 +445,50 @@ const CareerTimeline: React.FC<CareerTimelineProps> = ({ data }) => {
           </div>
         </div>
 
-        {/* Yellow stripe */}
-        <div className="h-2.5 bg-secondary" />
-      </div>
+          </div>{/* end screen inner */}
+        </div>{/* end screen bezel */}
+
+        {/* ── Bottom controls ── */}
+        <div className="flex items-center justify-between mt-4 px-2">
+
+          {/* D-pad */}
+          <div style={{ position: 'relative', width: '64px', height: '64px', flexShrink: 0 }}>
+            {[
+              { top: 0,    left: '33%', right: '33%', bottom: '67%', br: '4px 4px 0 0' },
+              { bottom: 0, left: '33%', right: '33%', top: '67%',    br: '0 0 4px 4px' },
+              { left: 0,   top: '33%',  bottom: '33%', right: '67%', br: '4px 0 0 4px' },
+              { right: 0,  top: '33%',  bottom: '33%', left: '67%',  br: '0 4px 4px 0' },
+              { top: '33%',left: '33%', right: '33%',  bottom: '33%',br: '0' },
+            ].map((s, i) => (
+              <div key={i} style={{ position: 'absolute', ...s, background: '#1a1a1a', borderRadius: s.br, boxShadow: 'inset 0 1px 2px rgba(255,255,255,0.05)' }} />
+            ))}
+          </div>
+
+          {/* Select / Start */}
+          <div className="flex gap-2">
+            {['SELECT','START'].map(l => (
+              <div key={l} style={{ background: '#1a1a1a', borderRadius: '20px', padding: '5px 12px', border: '2px solid #333' }}>
+                <span style={{ ...px, fontSize: '6px', color: '#666' }}>{l}</span>
+              </div>
+            ))}
+          </div>
+
+          {/* A / B buttons */}
+          <div className="flex items-center gap-3">
+            {[{ label: 'B', bg: '#fbbf24', color: '#1a1a1a' }, { label: 'A', bg: '#cc0000', color: '#fff' }].map(b => (
+              <div key={b.label} style={{
+                width: '32px', height: '32px', borderRadius: '50%',
+                background: b.bg, border: '3px solid #1a1a1a',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                boxShadow: '0 3px 0 rgba(0,0,0,0.4)',
+              }}>
+                <span className="font-comic text-sm" style={{ color: b.color }}>{b.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </div>{/* end Pokédex body */}
 
     </div>
   );
