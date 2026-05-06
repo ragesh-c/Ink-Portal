@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Project } from '../types';
 import ComicPanel from './ComicPanel';
 import MagneticTilt from './MagneticTilt';
-import { Monitor, Youtube, BookOpen, ExternalLink, ImageOff } from 'lucide-react';
+import { Monitor, Youtube, BookOpen, ExternalLink, ImageOff, Instagram } from 'lucide-react';
 
 interface ProjectCardProps {
   project: Project;
@@ -17,12 +17,22 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project, onClick }) => {
     switch (project.platform) {
       case 'YouTube': return <Youtube size={20} />;
       case 'Medium': return <BookOpen size={20} />;
+      case 'Instagram': return <Instagram size={20} />;
       default: return <Monitor size={20} />;
     }
   };
 
   return (
-    <div onClick={(e) => onClick(project, e)} className="cursor-pointer group h-full w-full">
+    <div
+      onClick={(e) => {
+        if (project.platform === 'Instagram') {
+          window.open(project.externalURL, '_blank', 'noopener,noreferrer');
+        } else {
+          onClick(project, e);
+        }
+      }}
+      className="cursor-pointer group h-full w-full"
+    >
       <MagneticTilt intensity={8} className="h-full">
         <ComicPanel className="h-full flex flex-col hover:shadow-comic-hover transition-shadow duration-300">
           {/* Image Section - Enforced 16:9 Aspect Ratio via aspect-video */}

@@ -15,6 +15,7 @@ type AnimationState = 'idle' | 'out' | 'in-snap' | 'in';
 
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<TabType>('Home');
+  const [projectTab, setProjectTab] = useState<'Product Design' | 'Animation' | 'Creative Production'>('Product Design');
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [clickPosition, setClickPosition] = useState<{x: number, y: number} | null>(null);
   const [flipState, setFlipState] = useState<AnimationState>('idle');
@@ -193,19 +194,51 @@ const App: React.FC = () => {
           </div>
   );
 
-  const renderProjects = () => (
-    <div>
-      <div className="flex items-center gap-4 mb-8">
-        <h3 className="font-comic text-4xl uppercase bg-secondary px-6 py-2 border-4 border-ink shadow-comic transform -rotate-1">Full Archive</h3>
-        <span className="font-sans text-gray-500 font-bold hidden md:inline-block border-b-4 border-gray-300 pb-1">// SELECT A PANEL TO VIEW</span>
+  const renderProjects = () => {
+    const tabs = ['Product Design', 'Animation', 'Creative Production'] as const;
+    const filtered = PROJECTS_DATA.filter(p =>
+      projectTab === 'Product Design'
+        ? p.type === 'Product Design' || p.type === 'Case Study'
+        : p.type === projectTab
+    );
+
+    return (
+      <div className="pb-12">
+        {/* Sub-tabs */}
+        <div className="relative mb-8">
+          <div className="absolute top-1/2 left-0 right-0 h-1 bg-ink -translate-y-1/2 z-0" />
+          <div className="relative flex gap-3 z-10 py-1.5">
+            {tabs.map((tab) => {
+              const isActive = projectTab === tab;
+              return (
+                <button
+                  key={tab}
+                  onClick={() => setProjectTab(tab)}
+                  className={`
+                    px-5 py-2 font-comic text-base uppercase tracking-widest
+                    border-2 border-ink transition-all duration-200
+                    ${isActive
+                      ? 'bg-ink text-white'
+                      : 'bg-paper text-ink hover:bg-zinc-100'
+                    }
+                  `}
+                >
+                  {tab}
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {filtered.map((project) => (
+            <ProjectCard key={project.id} project={project} onClick={handleProjectClick} />
+          ))}
+        </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pb-12">
-        {PROJECTS_DATA.map((project) => (
-          <ProjectCard key={project.id} project={project} onClick={handleProjectClick} />
-        ))}
-      </div>
-    </div>
-  );
+    );
+  };
 
   const renderAbout = () => (
     <div className="space-y-8 relative isolate">

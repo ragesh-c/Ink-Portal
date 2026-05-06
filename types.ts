@@ -2,8 +2,8 @@
 export interface Project {
   id: string;
   title: string;
-  type: 'UX' | 'Animation' | 'Case Study';
-  platform: 'Medium' | 'YouTube' | 'Web' | 'Other';
+  type: 'Product Design' | 'Animation' | 'Case Study' | 'Creative Production';
+  platform: 'Medium' | 'YouTube' | 'Web' | 'Instagram' | 'Other';
   externalURL: string;
   thumbnailImage: string;
   shortDescription: string;

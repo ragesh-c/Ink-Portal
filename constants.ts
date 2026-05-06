@@ -2,7 +2,7 @@ import { Project, AboutContent, CareerItem } from './types';
 
 export const APP_CONFIG = {
   appName: "Ragesh Changam",
-  appSubtitle: "UX Designer Environment Artist",
+  appSubtitle: "Product Designer | Creative Designer",
 };
 
 export const PROJECTS_DATA: Project[] = [
@@ -19,7 +19,7 @@ export const PROJECTS_DATA: Project[] = [
   {
     id: "proj-01",
     title: "FinFlexi AI",
-    type: "UX",
+    type: "Product Design",
     platform: "Medium",
     externalURL: "https://medium.com/@ragesh-changam/finflexi-ai-a-premium-ui-system-for-gen-z-money-management-d5848f69d109",
     thumbnailImage: "https://res.cloudinary.com/dpxbzg9tn/image/upload/v1765617047/01_Free_iPhone_16_Pro_Mockup_Holding_By_Hand_1_qccdsk.png",
@@ -79,11 +79,71 @@ export const PROJECTS_DATA: Project[] = [
   {
     id: "proj-03",
     title: "Google’s Digital Wellbeing",
-    type: "UX",
+    type: "Product Design",
     platform: "Medium",
     externalURL: "https://medium.com/@ragesh-changam/how-googles-digital-wellbeing-forgot-wellbeing-a-kinder-bedtime-that-people-will-keep-6697e26fbd98",
     thumbnailImage: "https://res.cloudinary.com/dpxbzg9tn/image/upload/v1765642951/Post1_aqjvy6.png",
     shortDescription: "How Google’s Digital Wellbeing Forgot Wellbeing: a kinder Bedtime that people will keep",
+    featured: false
+  },
+  {
+    id: "prod-01",
+    title: "Making the most of the Nestor Lasso Sidra",
+    type: "Creative Production",
+    platform: "Instagram",
+    externalURL: "https://www.instagram.com/p/DFlLjaTMCsU/",
+    thumbnailImage: "/assets/assembly/prod-01.jpg",
+    shortDescription: "AC on set. Coffee brand content production for Assembly Roast, Bangalore.",
+    featured: false
+  },
+  {
+    id: "prod-02",
+    title: "Overripe Fermentation Series — What's in the box?",
+    type: "Creative Production",
+    platform: "Instagram",
+    externalURL: "https://www.instagram.com/p/DFKuVXRs3jx/",
+    thumbnailImage: "/assets/assembly/prod-02.jpg",
+    shortDescription: "AC on set. Coffee brand content production for Assembly Roast, Bangalore.",
+    featured: false
+  },
+  {
+    id: "prod-03",
+    title: "Overripe Fermentation Series — Launch",
+    type: "Creative Production",
+    platform: "Instagram",
+    externalURL: "https://www.instagram.com/p/DD6tvaDMYys/",
+    thumbnailImage: "/assets/assembly/prod-03.jpg",
+    shortDescription: "AC on set. Coffee brand content production for Assembly Roast, Bangalore.",
+    featured: false
+  },
+  {
+    id: "prod-04",
+    title: "Assembly x Apax Lab Finca Deborah Brewers Cup",
+    type: "Creative Production",
+    platform: "Instagram",
+    externalURL: "https://www.instagram.com/p/DDeNt1YCD3B/",
+    thumbnailImage: "/assets/assembly/prod-04.jpg",
+    shortDescription: "AC on set. Coffee brand content production for Assembly Roast, Bangalore.",
+    featured: false
+  },
+  {
+    id: "prod-05",
+    title: "Assembly x Eren Armitage Collection",
+    type: "Creative Production",
+    platform: "Instagram",
+    externalURL: "https://www.instagram.com/p/DCPSwBGIfcH/",
+    thumbnailImage: "/assets/assembly/prod-05.jpg",
+    shortDescription: "AC on set. Coffee brand content production for Assembly Roast, Bangalore.",
+    featured: false
+  },
+  {
+    id: "prod-06",
+    title: "Making the most of the Sebastian Ramirez White Honey Geisha",
+    type: "Creative Production",
+    platform: "Instagram",
+    externalURL: "https://www.instagram.com/p/DIiqKAGN9Li/",
+    thumbnailImage: "/assets/assembly/prod-06.jpg",
+    shortDescription: "AC on set. Coffee brand content production for Assembly Roast, Bangalore.",
     featured: false
   }
 ];
