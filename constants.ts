@@ -93,7 +93,7 @@ export const PROJECTS_DATA: Project[] = [
     platform: "Instagram",
     externalURL: "https://www.instagram.com/p/DFlLjaTMCsU/",
     thumbnailImage: "/assets/assembly/prod-01.jpg",
-    shortDescription: "AC on set. Coffee brand content production for Assembly Roast, Bangalore.",
+    shortDescription: "AC + Script. Coffee brand content production for Assembly Roast, London.",
     featured: false
   },
   {
@@ -103,7 +103,7 @@ export const PROJECTS_DATA: Project[] = [
     platform: "Instagram",
     externalURL: "https://www.instagram.com/p/DFKuVXRs3jx/",
     thumbnailImage: "/assets/assembly/prod-02.jpg",
-    shortDescription: "AC on set. Coffee brand content production for Assembly Roast, Bangalore.",
+    shortDescription: "AC on set. Coffee brand content production for Assembly Roast, London.",
     featured: false
   },
   {
@@ -113,7 +113,7 @@ export const PROJECTS_DATA: Project[] = [
     platform: "Instagram",
     externalURL: "https://www.instagram.com/p/DD6tvaDMYys/",
     thumbnailImage: "/assets/assembly/prod-03.jpg",
-    shortDescription: "AC on set. Coffee brand content production for Assembly Roast, Bangalore.",
+    shortDescription: "AC + On location coordinator. Coffee brand content production for Assembly Roast, London.",
     featured: false
   },
   {
@@ -123,7 +123,7 @@ export const PROJECTS_DATA: Project[] = [
     platform: "Instagram",
     externalURL: "https://www.instagram.com/p/DDeNt1YCD3B/",
     thumbnailImage: "/assets/assembly/prod-04.jpg",
-    shortDescription: "AC on set. Coffee brand content production for Assembly Roast, Bangalore.",
+    shortDescription: "AC + On location coordinator. Coffee brand content production for Assembly Roast, London.",
     featured: false
   },
   {
@@ -133,7 +133,7 @@ export const PROJECTS_DATA: Project[] = [
     platform: "Instagram",
     externalURL: "https://www.instagram.com/p/DCPSwBGIfcH/",
     thumbnailImage: "/assets/assembly/prod-05.jpg",
-    shortDescription: "AC on set. Coffee brand content production for Assembly Roast, Bangalore.",
+    shortDescription: "AC on set. Coffee brand content production for Assembly Roast, London.",
     featured: false
   },
   {
@@ -143,7 +143,7 @@ export const PROJECTS_DATA: Project[] = [
     platform: "Instagram",
     externalURL: "https://www.instagram.com/p/DIiqKAGN9Li/",
     thumbnailImage: "/assets/assembly/prod-06.jpg",
-    shortDescription: "AC on set. Coffee brand content production for Assembly Roast, Bangalore.",
+    shortDescription: "AC on set. Coffee brand content production for Assembly Roast, London.",
     featured: false
   }
 ];
