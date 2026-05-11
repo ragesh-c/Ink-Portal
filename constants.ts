@@ -17,6 +17,16 @@ export const PROJECTS_DATA: Project[] = [
     featured: true
   },
   {
+    id: "proj-09",
+    title: "Is the New FPL App a Lesson in How Not to Redesign?",
+    type: "Case Study",
+    platform: "Medium",
+    externalURL: "https://medium.com/@ragesh-changam/is-the-new-fantasy-premier-league-app-a-lesson-in-how-not-to-redesign-07b71964602d",
+    thumbnailImage: "",
+    shortDescription: "First impression: modern and fresh. Reality after a week: friction everywhere. A critique of the FPL app's July 2025 redesign — polished visuals, broken experience.",
+    featured: false
+  },
+  {
     id: "proj-01",
     title: "FinFlexi AI",
     type: "Product Design",
