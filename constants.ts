@@ -22,7 +22,7 @@ export const PROJECTS_DATA: Project[] = [
     type: "Case Study",
     platform: "Medium",
     externalURL: "https://medium.com/@ragesh-changam/is-the-new-fantasy-premier-league-app-a-lesson-in-how-not-to-redesign-07b71964602d",
-    thumbnailImage: "",
+    thumbnailImage: "/assets/fpl-case-study.webp",
     shortDescription: "First impression: modern and fresh. Reality after a week: friction everywhere. A critique of the FPL app's July 2025 redesign — polished visuals, broken experience.",
     featured: false
   },
